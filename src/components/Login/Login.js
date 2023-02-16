@@ -4,12 +4,16 @@ import { useNavigate } from 'react-router';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = (data) => console.log(data);
+
     const navigate = useNavigate()
+
+    const handleLogin = (data) => {
+        console.log(data);
+    }
     return (
-        <div className=' lg:w-1/4 mx-auto lg:p-10 shadow-sm shadow-primary'>
+        <div className=' lg:w-1/2 mx-auto lg:p-10 shadow-sm shadow-primary'>
             <h1 className=' text-3xl font-bold text-primary'>Login</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className=''>
+            <form onSubmit={handleSubmit(handleLogin)} className=''>
                 <div className="form-control w-full max-w-xs mx-auto">
                     <label className="label">
                         <span className="label-text">Email</span>

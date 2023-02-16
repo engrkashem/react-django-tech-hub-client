@@ -1,22 +1,43 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = (data) => console.log(data);
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
+    const { createUser } = useContext(AuthContext);
+    const [er, setEr] = useState('');
+
+    const handleRegister = (data) => {
+        const { email, password, confirmPassword } = data;
+        if (password === confirmPassword) {
+            setEr('')
+            createUser(email, password)
+                .then(res => {
+                    const user = res.user;
+                    console.log(user);
+                })
+                .catch(error => console.error(error))
+        }
+        else {
+            setEr('Password did not match.')
+        }
+        console.log(email, password, confirmPassword);
+    }
+
     return (
-        <div className=' lg:w-1/4 mx-auto lg:p-10 shadow-sm shadow-primary'>
+        <div className=' lg:w-1/2 mx-auto lg:p-10 shadow-sm shadow-primary'>
             <h1 className=' text-3xl font-bold text-primary'>Register</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className=''>
+            <form onSubmit={handleSubmit(handleRegister)} className=''>
                 <div className="form-control w-full max-w-xs mx-auto">
                     {/* name */}
                     <label className="label">
-                        <span className="label-text">Name</span>
+                        <span className="label-text">User Name</span>
                     </label>
                     <input
-                        type="name"
+                        type="text"
                         placeholder="Your Name"
                         className="input input-bordered w-full max-w-xs"
                         {...register("name", {
@@ -28,24 +49,6 @@ const Register = () => {
                     />
                     <label className="label">
                         {errors.name?.type === 'required' && <span className="label-text-alt text-red-700">{errors.name.message}</span>}
-                    </label>
-                    {/* User name */}
-                    <label className="label">
-                        <span className="label-text">User Name</span>
-                    </label>
-                    <input
-                        type="userName"
-                        placeholder="Your User Name"
-                        className="input input-bordered w-full max-w-xs"
-                        {...register("userName", {
-                            required: {
-                                value: true,
-                                message: 'userName is required'
-                            }
-                        })}
-                    />
-                    <label className="label">
-                        {errors.userName?.type === 'required' && <span className="label-text-alt text-red-700">{errors.userName.message}</span>}
                     </label>
 
                     {/* Email */}
@@ -101,7 +104,7 @@ const Register = () => {
                         <span className="label-text">Confirm Password</span>
                     </label>
                     <input
-                        type="confirmPassword"
+                        type="password"
                         placeholder="ReEnter your password"
                         className="input input-bordered w-full max-w-xs"
                         {...register("confirmPassword", {
@@ -118,7 +121,9 @@ const Register = () => {
                     <label className="label">
                         {errors.confirmPassword?.type === 'required' && <span className="label-text-alt text-red-700">{errors.confirmPassword.message}</span>}
                         {errors.confirmPassword?.type === 'pattern' && <span className="label-text-alt text-red-700">{errors.confirmPassword.message}</span>}
+                        {er && <span className=' text-red-700'>{er}</span>}
                     </label>
+
 
                     <input
                         type="submit" className="input input-bordered w-full max-w-xs border-primary" />
