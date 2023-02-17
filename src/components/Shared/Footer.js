@@ -5,7 +5,7 @@ const Footer = () => {
     const date = new Date();
     const year = date.getFullYear();
     return (
-        <footer className="footer footer-center p-10 bg-base-100 bg-green-50 text-base-content rounded">
+        <footer className="footer footer-center p-10 bg-blue-50 text-base-content rounded">
             <div className="grid grid-flow-col gap-4 font-semibold">
                 <Link to={'/about'} className="link link-hover">About us</Link>
                 <Link to={'/'} className="link link-hover">Contact</Link>

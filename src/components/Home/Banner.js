@@ -6,7 +6,7 @@ import pic2 from '../../assets/pic2.jpg';
 const Banner = () => {
     return (
         <div className='min-h-screen' >
-            <p className=' border-2 border-primary mx-auto max-w-lg py-5 rounded-full hover:bg-sky-50 font-bold'>New to TechHUB? <Link to={'/register'} className='text-primary'>Join Now</Link></p>
+            <p className=' border-2 border-primary mx-auto max-w-lg py-5 rounded-full hover:bg-blue-50 font-bold'>New to TechHUB? <Link to={'/register'} className='text-primary'>Join Now</Link></p>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 items-center'>
                 <div>
                     <div className="avatar w-full">
