@@ -1,9 +1,14 @@
 import React from 'react';
+import Banner from './Banner';
+import JoinBanner from './JoinBanner';
+import TopBanner from './TopBanner';
 
 const Home = () => {
     return (
         <div>
-            <h1>This is Home</h1>
+            <TopBanner></TopBanner>
+            <Banner></Banner>
+            <JoinBanner></JoinBanner>
         </div>
     );
 };
