@@ -14,6 +14,7 @@ const Login = () => {
     const [loginErr, setLoginErr] = useState('');
 
     const handleLogin = (data) => {
+        setLoginErr('')
         const { email, password } = data;
         signIn(email, password)
             .then(res => {

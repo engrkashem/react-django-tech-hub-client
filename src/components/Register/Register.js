@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
-import AuthProvider, { AuthContext } from '../../contexts/AuthProvider';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { AuthContext } from '../../contexts/AuthProvider';
+
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
