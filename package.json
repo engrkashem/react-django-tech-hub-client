@@ -8,11 +8,13 @@
     "@testing-library/user-event": "^13.5.0",
     "daisyui": "^2.50.1",
     "firebase": "^9.17.1",
+    "nth-check": "^2.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.1",
     "react-router-dom": "^6.8.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
+    "rollback": "^0.2.16",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
