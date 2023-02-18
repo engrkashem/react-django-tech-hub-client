@@ -8,6 +8,7 @@ const Register = () => {
 
     const navigate = useNavigate();
     const { createUser } = useContext(AuthContext);
+
     const [er, setEr] = useState('');
 
     const handleRegister = (data) => {

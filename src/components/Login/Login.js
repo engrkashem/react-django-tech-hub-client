@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const navigate = useNavigate()
 
+    const { signIn } = useContext(AuthContext);
+
     const handleLogin = (data) => {
-        console.log(data);
+        const { email, password } = data;
+        signIn(email, password)
+            .then(res => {
+                // const user = res?.user;
+                // console.log(user);
+                console.log(res);
+            })
+            .catch((error) => {
+                // const errorCode = error?.code;
+                console.error(error);
+            })
+        // console.log(email, password);
     }
     return (
         <div className=' lg:w-1/2 mx-auto lg:p-10 shadow-sm shadow-primary'>
