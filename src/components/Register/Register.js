@@ -8,22 +8,25 @@ const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const navigate = useNavigate();
+   
+    const [registerErr, setRegisterErr] = useState('');
     const { createUser, signIn, signInWithGoogle } = useContext(AuthContext);
-    const [err, setErr] = useState('');
 
     const handleRegister = (data) => {
         const { email, password, confirmPassword } = data;
         if (password === confirmPassword) {
-            setErr('')
+            setRegisterErr('');
             createUser(email, password)
                 .then(res => {
                     const user = res.user;
                     console.log(user);
                 })
-                .catch(error => console.error(error))
+                .catch(error => {
+                    setRegisterErr(error.message);
+                })
         }
         else {
-            setErr('Password did not match.')
+            setRegisterErr('Password did not match.')
         }
         console.log(email, password, confirmPassword);
     }
@@ -132,7 +135,7 @@ const Register = () => {
                     <label className="label">
                         {errors.confirmPassword?.type === 'required' && <span className="label-text-alt text-red-700">{errors.confirmPassword.message}</span>}
                         {errors.confirmPassword?.type === 'pattern' && <span className="label-text-alt text-red-700">{errors.confirmPassword.message}</span>}
-                        {err && <span className=' text-red-700'>{err}</span>}
+                        {registerErr && <p className=' text-red-500'>{registerErr}</p>}
                     </label>
 
 

@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const navigate = useNavigate()
 
+    const { signIn } = useContext(AuthContext);
+
+    const [loginErr, setLoginEr] = useState('');
+
     const handleLogin = (data) => {
-        console.log(data);
+        const { email, password } = data;
+        signIn(email, password)
+            .then(res => {
+                // const user = res?.user;
+                // console.log(user);
+                console.log(res);
+            })
+            .catch((error) => {
+                const errorMessage = error?.message;
+                setLoginEr(errorMessage);
+            })
+        // console.log(email, password);
     }
     return (
         <div className=' lg:w-1/2 mx-auto lg:p-10 shadow-sm shadow-primary'>
@@ -58,11 +74,12 @@ const Login = () => {
                     <label className="label">
                         {errors.password?.type === 'required' && <span className="label-text-alt text-red-700">{errors.password.message}</span>}
                         {errors.password?.type === 'pattern' && <span className="label-text-alt text-red-700">{errors.password.message}</span>}
-
+                        {loginErr && <p className='text-red-500 mt-1'>{loginErr}</p>}
                     </label>
 
                     <input
                         type="submit" className="input input-bordered w-full max-w-xs" />
+
                 </div>
             </form>
             <div className="divider w-1/2 mx-auto">OR</div>
