@@ -3,14 +3,15 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/AuthProvider';
 
+
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const navigate = useNavigate()
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn , signInWithGoogle} = useContext(AuthContext);
 
-    const [loginErr, setLoginEr] = useState('');
+    const [loginErr, setLoginErr] = useState('');
 
     const handleLogin = (data) => {
         const { email, password } = data;
@@ -22,10 +23,22 @@ const Login = () => {
             })
             .catch((error) => {
                 const errorMessage = error?.message;
-                setLoginEr(errorMessage);
+                setLoginErr(errorMessage);
             })
         // console.log(email, password);
     }
+
+    const handleGoogleLogin = () => {
+        signInWithGoogle()
+            .then((res) => {
+                const user = res.user;
+                console.log(user);
+            }).catch((error) => {
+                setLoginErr(error.message)
+            });
+        
+    }
+
     return (
         <div className=' lg:w-1/2 mx-auto lg:p-10 shadow-sm shadow-primary'>
             <h1 className=' text-3xl font-bold text-primary'>Login</h1>
@@ -83,7 +96,7 @@ const Login = () => {
                 </div>
             </form>
             <div className="divider w-1/2 mx-auto">OR</div>
-            <button className="btn btn-outline btn-primary">Continue with GOOGLE</button>
+            <button className="btn btn-outline btn-primary" onClick={()=> handleGoogleLogin()}>Continue with GOOGLE</button>
             <h6 className=' mt-5'>New to TechHUB? Please <button onClick={() => navigate('/register')} className=' text-primary font-semibold'>Register</button></h6>
         </div>
     );

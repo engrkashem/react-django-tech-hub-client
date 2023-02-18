@@ -36,7 +36,7 @@ const Register = () => {
             .then((res) => {
                 const user = res.user;
             }).catch((error) => {
-                setErr(error.message)
+                setRegisterErr(error.message)
             });
         
     }
