@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -10,6 +10,8 @@ const Login = () => {
 
     const { signIn } = useContext(AuthContext);
 
+    const [loginErr, setLoginEr] = useState('');
+
     const handleLogin = (data) => {
         const { email, password } = data;
         signIn(email, password)
@@ -19,8 +21,8 @@ const Login = () => {
                 console.log(res);
             })
             .catch((error) => {
-                // const errorCode = error?.code;
-                console.error(error);
+                const errorMessage = error?.message;
+                setLoginEr(errorMessage);
             })
         // console.log(email, password);
     }
@@ -72,11 +74,12 @@ const Login = () => {
                     <label className="label">
                         {errors.password?.type === 'required' && <span className="label-text-alt text-red-700">{errors.password.message}</span>}
                         {errors.password?.type === 'pattern' && <span className="label-text-alt text-red-700">{errors.password.message}</span>}
-
+                        {loginErr && <p className='text-red-500 mt-1'>{loginErr}</p>}
                     </label>
 
                     <input
                         type="submit" className="input input-bordered w-full max-w-xs" />
+
                 </div>
             </form>
             <div className="divider w-1/2 mx-auto">OR</div>

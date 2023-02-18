@@ -9,21 +9,23 @@ const Register = () => {
     const navigate = useNavigate();
     const { createUser } = useContext(AuthContext);
 
-    const [er, setEr] = useState('');
+    const [registerErr, setRegisterErr] = useState('');
 
     const handleRegister = (data) => {
         const { email, password, confirmPassword } = data;
         if (password === confirmPassword) {
-            setEr('')
+            setRegisterErr('');
             createUser(email, password)
                 .then(res => {
                     const user = res.user;
                     console.log(user);
                 })
-                .catch(error => console.error(error))
+                .catch(error => {
+                    setRegisterErr(error.message);
+                })
         }
         else {
-            setEr('Password did not match.')
+            setRegisterErr('Password did not match.')
         }
         console.log(email, password, confirmPassword);
     }
@@ -122,7 +124,7 @@ const Register = () => {
                     <label className="label">
                         {errors.confirmPassword?.type === 'required' && <span className="label-text-alt text-red-700">{errors.confirmPassword.message}</span>}
                         {errors.confirmPassword?.type === 'pattern' && <span className="label-text-alt text-red-700">{errors.confirmPassword.message}</span>}
-                        {er && <span className=' text-red-700'>{er}</span>}
+                        {registerErr && <p className=' text-red-500'>{registerErr}</p>}
                     </label>
 
 
