@@ -11,7 +11,7 @@ import Login from "../components/Login/Login";
 import People from "../components/People/People";
 import Register from "../components/Register/Register";
 import Main from "../Layout/Main";
-
+import ProfileUpdate from "../components/Dashboard/ProfileUpdate/ProfileUpdate";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +58,10 @@ const router = createBrowserRouter([
                 path: 'developers-details',
                 element: <DetailDevelopers></DetailDevelopers>
             },
+            {
+                path: 'user-update',
+                element: <ProfileUpdate></ProfileUpdate>            
+            }
 
         ]
     },
