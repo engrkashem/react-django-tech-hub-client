@@ -9,7 +9,7 @@ const Login = () => {
 
     const navigate = useNavigate()
 
-    const { signIn , signInWithGoogle} = useContext(AuthContext);
+    const { signIn, signInWithGoogle } = useContext(AuthContext);
 
     const [loginErr, setLoginErr] = useState('');
 
@@ -30,6 +30,7 @@ const Login = () => {
     }
 
     const handleGoogleLogin = () => {
+        setLoginErr('');
         signInWithGoogle()
             .then((res) => {
                 const user = res.user;
@@ -37,7 +38,7 @@ const Login = () => {
             }).catch((error) => {
                 setLoginErr(error.message)
             });
-        
+
     }
 
     return (
@@ -97,7 +98,7 @@ const Login = () => {
                 </div>
             </form>
             <div className="divider w-1/2 mx-auto">OR</div>
-            <button className="btn btn-outline btn-primary" onClick={()=> handleGoogleLogin()}>Continue with GOOGLE</button>
+            <button className="btn btn-outline btn-primary" onClick={() => handleGoogleLogin()}>Continue with GOOGLE</button>
             <h6 className=' mt-5'>New to TechHUB? Please <button onClick={() => navigate('/register')} className=' text-primary font-semibold'>Register</button></h6>
         </div>
     );

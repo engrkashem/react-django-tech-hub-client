@@ -8,14 +8,14 @@ const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const navigate = useNavigate();
-   
+
     const [registerErr, setRegisterErr] = useState('');
-    const { createUser, signIn, signInWithGoogle } = useContext(AuthContext);
+    const { createUser, signInWithGoogle } = useContext(AuthContext);
 
     const handleRegister = (data) => {
+        setRegisterErr('');
         const { email, password, confirmPassword } = data;
         if (password === confirmPassword) {
-            setRegisterErr('');
             createUser(email, password)
                 .then(res => {
                     const user = res.user;
@@ -32,13 +32,15 @@ const Register = () => {
     }
 
     const handleGoogleLogin = () => {
+        setRegisterErr('');
         signInWithGoogle()
             .then((res) => {
                 const user = res.user;
+                console.log(user)
             }).catch((error) => {
                 setRegisterErr(error.message)
             });
-        
+
     }
 
     return (
@@ -140,11 +142,11 @@ const Register = () => {
 
 
                     <input
-                        type="submit" className="input input-bordered w-full max-w-xs border-primary" onClick={handleGoogleLogin}/>
+                        type="submit" className="input input-bordered w-full max-w-xs border-primary" onClick={handleGoogleLogin} />
                 </div>
             </form>
             <div className="divider w-1/2 mx-auto">OR</div>
-            <button className="btn btn-outline btn-primary" onClick={()=> handleGoogleLogin()}>Continue with GOOGLE</button>
+            <button className="btn btn-outline btn-primary" onClick={() => handleGoogleLogin()}>Continue with GOOGLE</button>
             <h6 className=' mt-5'>Already a User? Please <button onClick={() => navigate('/login')} className=' text-primary font-semibold'>Login</button></h6>
         </div>
     );
