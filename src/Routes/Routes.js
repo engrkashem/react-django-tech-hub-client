@@ -13,6 +13,7 @@ import Register from "../components/Register/Register";
 import Main from "../Layout/Main";
 import ProfileUpdate from "../components/Dashboard/ProfileUpdate/ProfileUpdate";
 import PrivateRoutes from "./PrivateRoutes";
+import DashboardLayout from "../Layout/DashboardLayout";
 
 const router = createBrowserRouter([
     {
@@ -58,17 +59,22 @@ const router = createBrowserRouter([
             {
                 path: 'developers-details',
                 element: <DetailDevelopers></DetailDevelopers>
-            },
-            {
-                path: 'user-update',
-                element: <ProfileUpdate></ProfileUpdate>
             }
-
         ]
     },
     {
         path: '/dashboard',
-        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>
+        element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>
+            },
+            {
+                path: '/dashboard/update-profile',
+                element: <ProfileUpdate></ProfileUpdate>
+            }
+        ]
     }
 
 
