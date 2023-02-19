@@ -10,16 +10,22 @@ const Register = () => {
     const navigate = useNavigate();
 
     const [registerErr, setRegisterErr] = useState('');
-    const { createUser, signInWithGoogle } = useContext(AuthContext);
+
+    const { createUser, signInWithGoogle, updateUserProfile } = useContext(AuthContext);
 
     const handleRegister = (data) => {
         setRegisterErr('');
-        const { email, password, confirmPassword } = data;
+        const { email, password, confirmPassword, name } = data;
         if (password === confirmPassword) {
             createUser(email, password)
                 .then(res => {
-                    const user = res.user;
-                    console.log(user);
+                    console.log(res.user);
+                    const userInfo = {
+                        displayName: name
+                    }
+                    updateUserProfile(userInfo)
+                        .then(() => { })
+                        .catch(e => { })
                 })
                 .catch(error => {
                     setRegisterErr(error.message);
