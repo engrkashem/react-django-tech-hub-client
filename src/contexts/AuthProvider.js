@@ -16,9 +16,13 @@ const AuthProvider = ({ children }) => {
     }
 
     const signInWithGoogle = () => {
-        
+
         return signInWithPopup(auth, new GoogleAuthProvider());
     }
+
+    // const LogOut = () => {
+    //     return signOut()
+    // }
 
 
     const authInfo = {
