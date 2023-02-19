@@ -12,6 +12,7 @@ import People from "../components/People/People";
 import Register from "../components/Register/Register";
 import Main from "../Layout/Main";
 import ProfileUpdate from "../components/Dashboard/ProfileUpdate/ProfileUpdate";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -60,14 +61,14 @@ const router = createBrowserRouter([
             },
             {
                 path: 'user-update',
-                element: <ProfileUpdate></ProfileUpdate>            
+                element: <ProfileUpdate></ProfileUpdate>
             }
 
         ]
     },
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>
+        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>
     }
 
 

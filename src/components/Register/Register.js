@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 
@@ -12,6 +12,9 @@ const Register = () => {
     const [registerErr, setRegisterErr] = useState('');
 
     const { createUser, signInWithGoogle, updateUserProfile } = useContext(AuthContext);
+
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/dashboard';
 
     const handleRegister = (data) => {
         setRegisterErr('');
@@ -25,11 +28,12 @@ const Register = () => {
                     }
                     updateUserProfile(userInfo)
                         .then(() => { })
-                        .catch(e => { })
+                        .catch(e => { });
+                    navigate(from, { replace: true });
                 })
                 .catch(error => {
                     setRegisterErr(error.message);
-                })
+                });
         }
         else {
             setRegisterErr('Password did not match.')
@@ -41,12 +45,12 @@ const Register = () => {
         setRegisterErr('');
         signInWithGoogle()
             .then((res) => {
-                const user = res.user;
-                console.log(user)
+                // const user = res.user;
+                console.log(res);
+                navigate(from, { replace: true })
             }).catch((error) => {
                 setRegisterErr(error.message)
             });
-
     }
 
     return (

@@ -22,8 +22,8 @@ const NavBar = () => {
             user ?
                 <div className="dropdown dropdown-end dropdown-hover">
                     <div tabIndex={0} className="avatar">
-                        <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" alt='' />
+                        <div className="w-10 rounded-full ring ring-primary">
+                            <img src={user.photoURL} alt='' />
                         </div>
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">

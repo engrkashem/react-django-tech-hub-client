@@ -4,9 +4,9 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 
 const ProfileUpdate = () => {
-    const { signIn, signInWithGoogle, updateUserProfile } = useContext(AuthContext);
+    const { updateUserProfile } = useContext(AuthContext);
 
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm();
 
     const handleEdit = (data) => {
         const photo = data?.photo;
@@ -15,30 +15,30 @@ const ProfileUpdate = () => {
         }
 
         updateUserProfile(userInfo)
-        .then(res=> {
-            console.log(res, 'line 18')
-        })
-        .catch(err => {
-            console.log(err, 'line 21')
+            .then(res => {
+                console.log(res, 'line 18')
+            })
+            .catch(err => {
+                console.log(err, 'line 21')
 
-        });
+            });
     }
 
     return (
         <div className=' lg:w-1/2 mx-auto lg:p-10 shadow-sm shadow-primary py-5' >
             <h1 className=' text-3xl font-bold text-primary'>Edit profile</h1>
-            <form  className='my-5' onSubmit={handleSubmit(handleEdit)}>
+            <form className='my-5' onSubmit={handleSubmit(handleEdit)}>
                 <div className="form-control w-full max-w-xs mx-auto">
                     <label className="label">
                         <span className="label-text">Photo</span>
                     </label>
                     <input type='text' className="input input-bordered w-full max-w-xs" {...register("photo", {
-                            required: {
-                                value: true,
-                                message: 'Photo URL is required'
-                            }
-                        })}
-                        placeholder='Your photo URL'/>
+                        required: {
+                            value: true,
+                            message: 'Photo URL is required'
+                        }
+                    })}
+                        placeholder='Your photo URL' />
                     <label className="label">
                         <span className="label-text">Name</span>
                     </label>
@@ -53,8 +53,8 @@ const ProfileUpdate = () => {
                             }
                         })}
                     />
-                   
-                   <label className="label">
+
+                    <label className="label">
                         <span className="label-text">Prefession</span>
                     </label>
                     <input
@@ -72,14 +72,14 @@ const ProfileUpdate = () => {
                         className="input input-bordered w-full max-w-xs"
                         {...register("interest")}
                     />
-                   
+
 
                     <input
                         type="submit" className="input input-bordered w-full max-w-xs my-5" />
 
                 </div>
             </form>
-            
+
         </div>
     );
 };
