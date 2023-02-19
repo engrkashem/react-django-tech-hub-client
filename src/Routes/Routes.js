@@ -3,6 +3,7 @@ import About from "../components/About/About";
 import DetailDevelopers from "../components/About/DetailDevelopers";
 import DetailsProject from "../components/About/DetailsProject";
 import Courses from "../components/Courses/Courses";
+import Dashboard from "../components/Dashboard/Dashboard/Dashboard";
 import Discover from "../components/Discover/Discover";
 import Home from "../components/Home/Home";
 import Jobs from "../components/Jobs/Jobs";
@@ -59,7 +60,12 @@ const router = createBrowserRouter([
             },
 
         ]
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>
     }
+
 
 ]);
 

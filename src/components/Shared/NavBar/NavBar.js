@@ -27,7 +27,8 @@ const NavBar = () => {
                         </div>
                     </div>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><button>Item 1</button></li>
+                        <li><small className='font-semibold'>{user.displayName}</small></li>
+                        <li><Link to={'/dashboard'} className='w-full'>Dashboard</Link></li>
                         <li><button onClick={handleSignout} className='w-full'>Sign Out</button></li>
                     </ul>
                 </div>
