@@ -5,7 +5,7 @@ import devDetailPic from '../../assets/about/devDetailPic.jpg';
 const DetailsProject = () => {
     const navigate = useNavigate();
     return (
-        <div className=' h-screen flex flex-col justify-between p-12'>
+        <div className=' min-h-screen flex flex-col justify-between p-12 bg-base-100'>
             <div >
                 <h3 className='text-6xl font-bold text-primary'>Project Details</h3>
                 <h4 className='text-3xl font-bold mt-5'>TechHUB</h4>

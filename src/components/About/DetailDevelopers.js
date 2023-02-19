@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const DetailDevelopers = () => {
     const navigate = useNavigate();
     return (
-        <div className=' h-screen flex flex-col justify-between p-12'>
+        <div className=' min-h-screen flex flex-col justify-between p-12 bg-base-100'>
             <div >
                 <h3 className='text-6xl font-bold text-primary'>Developers Team</h3>
                 <h4 className='text-3xl font-bold mt-5'>The Django Knight</h4>
