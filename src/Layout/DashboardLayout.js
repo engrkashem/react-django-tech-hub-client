@@ -8,7 +8,7 @@ const DashboardLayout = () => {
             <NavBar></NavBar>
             <div className="drawer drawer-mobile">
                 <input id="dashboard-side-bar" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center border-l border-blue-100 pt-96">
+                <div className="drawer-content flex flex-col items-center justify-center border-l border-blue-100">
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">
