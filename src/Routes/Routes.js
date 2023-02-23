@@ -45,10 +45,6 @@ const router = createBrowserRouter([
                 element: <People />
             },
             {
-                path: 'courses',
-                element: <Courses />
-            },
-            {
                 path: 'jobs',
                 element: <Jobs />
             },
@@ -73,6 +69,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/update-profile',
                 element: <ProfileUpdate></ProfileUpdate>
+            },
+            {
+                path: '/dashboard/course',
+                element: <Courses></Courses>
             }
         ]
     }

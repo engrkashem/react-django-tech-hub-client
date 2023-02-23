@@ -4,12 +4,11 @@ import NavBar from '../components/Shared/NavBar/NavBar';
 
 const DashboardLayout = () => {
     return (
-        <div>
+        <div >
             <NavBar></NavBar>
             <div className="drawer drawer-mobile">
                 <input id="dashboard-side-bar" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center border-l border-blue-100">
-
+                <div className="drawer-content flex flex-col items-center justify-center border-l border-blue-100 pt-96">
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side">

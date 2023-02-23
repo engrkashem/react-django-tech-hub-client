@@ -18,7 +18,7 @@ const NavBar = () => {
             user ?
                 <React.Fragment>
                     <li><Link to={'/dashboard'}>Blogs</Link></li>
-                    <li><Link to={'/dashboard'}>Networking</Link></li>
+                    <li><Link to={'/dashboard/course'}>Courses</Link></li>
                     <li><Link to={'/jobs'} > Jobs </Link></li>
                     <li><Link to={'/jobs'} > Messiging </Link></li>
                     <li><Link to={'/jobs'} > Notifications </Link></li>
