@@ -1,28 +1,26 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import CourseCard from './CourseCard';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
 const Courses = () => {
-    const all_course_url = `http://127.0.0.1:8000/course/`;
+    const [courses, setCourses] = useState([]);
 
-    const { data: courses = [] } = useQuery({
-        queryKey: ['courses'],
-        queryFn: () => fetch(all_course_url).then(res => res.json())
-    })
-    const all_courses = courses.course
-    console.log(all_courses)
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/course/')
+            .then(response => {
+                setCourses(response.data.course)
+            })
+            .catch(error => console.log(error));
+    }, []);
 
     return (
-        <div className='px-5 lg:px-20 w-full min-h-screen'>
-            <div className='mt-10'>
-                {
-                    all_courses?.map(course => <CourseCard
-                        key={course.id}
-                        course={course}
-                    ></CourseCard>)
-                }
-            </div>
-
+        <div className='nim-h-screen w-full grid grid-cols-1  gap-5 ' style={{ height: '100vh' }}>
+            {
+                courses?.map(course => <CourseCard
+                    key={course.id}
+                    course={course}
+                />)
+            }
         </div>
     );
 };
