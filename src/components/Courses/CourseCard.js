@@ -11,7 +11,7 @@ const CourseCard = ({ course }) => {
             </figure>
             <div className="card-body col-span-1 h-2">
                 <p>Course length: <span>{course_length}</span></p>
-                <p>Instructor Name: <span>{instructor}</span> </p>
+                <p>Instructor Name: <span>{instructor.instructor}</span> </p>
                 <p>Course fees: <span>{course_fee} TK</span></p>
 
                 <div className="card-actions justify-end">
