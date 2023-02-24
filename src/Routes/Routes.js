@@ -14,6 +14,7 @@ import Main from "../Layout/Main";
 import ProfileUpdate from "../components/Dashboard/ProfileUpdate/ProfileUpdate";
 import PrivateRoutes from "./PrivateRoutes";
 import DashboardLayout from "../Layout/DashboardLayout";
+import WriteBlog from "../components/Dashboard/Dashboard/WriteBlog";
 
 const router = createBrowserRouter([
     {
@@ -45,20 +46,12 @@ const router = createBrowserRouter([
                 element: <People />
             },
             {
-                path: 'jobs',
-                element: <Jobs />
-            },
-            {
                 path: 'project-details',
                 element: <DetailsProject></DetailsProject>
             },
             {
                 path: 'developers-details',
                 element: <DetailDevelopers></DetailDevelopers>
-            },
-            {
-                path: 'jobs',
-                element: <Jobs></Jobs>
             }
         ]
     },
@@ -77,6 +70,14 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/course',
                 element: <Courses></Courses>
+            },
+            {
+                path: '/dashboard/write-blog',
+                element: <WriteBlog></WriteBlog>
+            },
+            {
+                path: '/dashboard/jobs',
+                element: <Jobs />
             }
         ]
     }

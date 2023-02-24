@@ -1,9 +1,12 @@
 import React from 'react';
 
 const CourseCard = ({ course }) => {
+    const { course_fee, course_length, description, title, video_thumbnail_url
+    } = course
     // const course=props.course
     const { title, video_thumbnail_url, course_length, instructor, course_fee, description } = course
     return (
+
         <div className="card w-3/4 bg-base-100 shadow-xl mx-auto grid grid-cols-2 gap-5">
             <h2 className="card-title col-span-2 text-3xl">{title}</h2>
             <figure className="w-52 h-40 col-span-1">
@@ -15,6 +18,7 @@ const CourseCard = ({ course }) => {
                 <p>Course fees: <span>{course_fee} TK</span></p>
 
                 <div className="card-actions justify-end">
+
                     <button className="btn btn-primary">Enroll Now</button>
                 </div>
             </div>

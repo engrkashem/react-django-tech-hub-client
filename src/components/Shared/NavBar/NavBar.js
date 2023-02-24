@@ -19,8 +19,8 @@ const NavBar = () => {
                 <React.Fragment>
                     <li><Link to={'/dashboard'}>Blogs</Link></li>
                     <li><Link to={'/dashboard/course'}>Courses</Link></li>
-                    <li><Link to={'/jobs'} > Jobs </Link></li>
-                    <li><Link to={'/jobs'} > Messiging </Link></li>
+                    <li><Link to={'/dashboard/jobs'} > Jobs </Link></li>
+                    <li><Link to={'/jobs'} > Messaging </Link></li>
                     <li><Link to={'/jobs'} > Notifications </Link></li>
                     <div className="dropdown dropdown-end dropdown-hover">
                         <div tabIndex={0} className="avatar">
