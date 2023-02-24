@@ -1,8 +1,8 @@
 import React from 'react';
 
-const CourseCard = ({ courses }) => {
+const CourseCard = ({ course }) => {
     // const course=props.course
-    const { title, video_thumbnail_url, course_length, instructor, course_fee, description } = courses
+    const { title, video_thumbnail_url, course_length, instructor, course_fee, description } = course
     return (
         <div className="card w-3/4 bg-base-100 shadow-xl mx-auto grid grid-cols-2 gap-5">
             <h2 className="card-title col-span-2 text-3xl">{title}</h2>
