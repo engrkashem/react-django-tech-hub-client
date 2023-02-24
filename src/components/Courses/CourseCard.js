@@ -1,23 +1,23 @@
 import React from 'react';
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ courses }) => {
     // const course=props.course
     return (
         <div className="card w-3/4 bg-base-100 shadow-xl mx-auto grid grid-cols-2 gap-5">
-            <h2 className="card-title col-span-2 text-3xl">{course.title}</h2>
+            <h2 className="card-title col-span-2 text-3xl">{courses.title}</h2>
             <figure className="w-52 h-40 col-span-1">
-                <img src={course.video_thumbnail_url} alt="thumbnail" />
+                <img src={courses.video_thumbnail_url} alt="thumbnail" />
             </figure>
             <div className="card-body col-span-1 h-2">
-                <p>Course length: <span>{course.course_length}</span></p>
-                <p>Instructor Name: <span>{course.instructor}</span> </p>
-                <p>Course fees: <span>{course.course_fee} TK</span></p>
+                <p>Course length: <span>{courses.course_length}</span></p>
+                <p>Instructor Name: <span>{courses.instructor}</span> </p>
+                <p>Course fees: <span>{courses.course_fee} TK</span></p>
 
                 <div className="card-actions justify-end">
                     <button className="btn btn-primary">Enroll Now</button>
                 </div>
             </div>
-            <p>{course.description.slice(0, 100)}...</p>
+            <p>{courses.description.slice(0, 100)}...</p>
         </div>
     );
 };
