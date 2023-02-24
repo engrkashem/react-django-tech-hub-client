@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import DashSide from '../components/Dashboard/Dashboard/DashSide';
 import NavBar from '../components/Shared/NavBar/NavBar';
 
 const DashboardLayout = () => {
@@ -15,7 +16,7 @@ const DashboardLayout = () => {
                     <label htmlFor="dashboard-side-bar" className="drawer-overlay"></label>
 
                     <div className='menu p-4 w-80 bg-base-100'>
-                        <h1>Hello</h1>
+                        <DashSide></DashSide>
                     </div>
 
                 </div>
