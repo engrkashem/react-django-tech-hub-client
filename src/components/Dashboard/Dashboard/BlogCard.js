@@ -2,7 +2,7 @@ import React from 'react';
 import ksmPic from '../../../assets/profile/arifPic.png';
 
 const BlogCard = ({ blog }) => {
-    const { blog_heading, blog_body, post_time, topic, img_url, blog_creator, liked } = blog
+    const { blog_heading, blog_body, post_time, topic, img_url, blog_creator } = blog
     console.log(blog_body.slice(0, 11))
     return (
         <div className=' border-b border-blue-100 mb-5 p-5'>
