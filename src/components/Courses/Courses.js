@@ -1,66 +1,28 @@
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 import CourseCard from './CourseCard';
 
 const Courses = () => {
-    const demo = [
-        {
-            id: 1,
-            course_name: 'HTML',
-            instructor: 'naim',
-            course_details: 'dgfkghdfkjsghdfkjshgkljdfhgdfkjshgkjdfhgkljdfshgkljsahgkjashag'
-        },
-        {
-            id: 2,
-            course_name: 'CSS',
-            instructor: 'ratul',
-            course_details: 'dgfkghdfkjsghdfkjshgkljdfhgdfkjshgkjdfhgkljdfshgkljsahgkjashag'
+    const all_course_url = `http://127.0.0.1:8000/course/`;
 
-        },
-        {
-            id: 3,
-            course_name: 'JS',
-            instructor: 'ratul',
-            course_details: 'dgfkghdfkjsghdfkjshgkljdfhgdfkjshgkjdfhgkljdfshgkljsahgkjashag'
+    const { data: courses = [] } = useQuery({
+        queryKey: ['courses'],
+        queryFn: () => fetch(all_course_url).then(res => res.json())
+    })
+    const all_courses = courses.course
+    console.log(all_courses)
 
-        },
-        {
-            id: 4,
-            course_name: 'CSS',
-            instructor: 'ratul',
-            course_details: 'dgfkghdfkjsghdfkjshgkljdfhgdfkjshgkjdfhgkljdfshgkljsahgkjashag'
-
-        },
-        {
-            id: 5,
-            course_name: 'CSS',
-            instructor: 'ratul',
-            course_details: 'dgfkghdfkjsghdfkjshgkljdfhgdfkjshgkjdfhgkljdfshgkljsahgkjashag'
-
-        },
-        {
-            id: 6,
-            course_name: 'CSS',
-            instructor: 'ratul',
-            course_details: 'dgfkghdfkjsghdfkjshgkljdfhgdfkjshgkjdfhgkljdfshgkljsahgkjashag'
-
-        },
-        {
-            id: 7,
-            course_name: 'CSS',
-            instructor: 'ratul',
-            course_details: 'dgfkghdfkjsghdfkjshgkljdfhgdfkjshgkjdfhgkljdfshgkljsahgkjashag'
-
-        }
-    ]
     return (
-        <div className='nim-h-screen w-full grid grid-cols-1  gap-5 pt-[350px] lg:pt-[600px] pb-10'>
-            {
-                demo.map(course => <CourseCard
-                    key={course.id}
-                    course={course}
-                ></CourseCard>)
-            }
-            <h1>Testing</h1>
+        <div className='px-5 lg:px-20 w-full min-h-screen'>
+            <div className='mt-10'>
+                {
+                    all_courses?.map(course => <CourseCard
+                        key={course.id}
+                        course={course}
+                    ></CourseCard>)
+                }
+            </div>
+
         </div>
     );
 };

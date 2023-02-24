@@ -31,7 +31,7 @@ const Jobs = () => {
 
     return (
 
-        <div className='px-20 w-full min-h-screen'>
+        <div className='px-5 lg:px-20 w-full min-h-screen'>
             <form onSubmit={handleSubmit(handleSearch)} className=' flex items-center justify-center pt-5 mb-20'>
                 <input type="text" placeholder="Search with your job skill" className="input border rounded-full input-primary w-full max-w-md" name='search' {...register("search", {
                     required: {
