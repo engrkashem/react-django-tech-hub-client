@@ -1,8 +1,6 @@
 import React from 'react';
 
 const CourseCard = ({ course }) => {
-    const { course_fee, course_length, description, title, video_thumbnail_url
-    } = course
     // const course=props.course
     const { title, video_thumbnail_url, course_length, instructor, course_fee, description } = course
     return (
