@@ -52,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path: 'developers-details',
                 element: <DetailDevelopers></DetailDevelopers>
+            },
+            {
+                path: 'jobs',
+                element: <Jobs></Jobs>
             }
         ]
     },
