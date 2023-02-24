@@ -7,13 +7,16 @@ import { Outlet } from 'react-router-dom';
 import JobCard from './JobCard';
 
 const Jobs = () => {
-    // const [isErr, setErr] = useState('')
+    const [isErr, setErr] = useState('')
     const [isSearch, setSearch] = useState('');
     const { register, formState: { errors }, handleSubmit } = useForm();
     const jobs_url = `http://127.0.0.1:8000/job/?search=`;
-    const {isError, error, data: jobs = [] } = useQuery({
+    const { data: jobs = [] } = useQuery({
         queryKey: ['job', isSearch],
-        queryFn: () => fetch(jobs_url+isSearch).then(res => res.json())
+        queryFn: () => fetch(jobs_url+isSearch).then(res => res.json()),
+        onError: (errors)=>{
+            setErr(errors)
+        }
         
 
     })
@@ -46,7 +49,7 @@ const Jobs = () => {
             </form>
             
             {
-               jobs?.map(job=>
+                jobs.jobs?.map(job=>
                 <JobCard
                     key={job.id}
                     job={job}
