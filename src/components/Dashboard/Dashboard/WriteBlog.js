@@ -1,18 +1,126 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 
 const WriteBlog = () => {
-    const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const navigate = useNavigate()
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const onSubmit = blog => {
+        const blog_post_url = `http://127.0.0.1:8000/blog/`;
+        fetch(blog_post_url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(blog)
+        }).then(res => res.json()).then(data => {
+            data && navigate('/dashboard')
+        })
+        // console.log(blog);
+    }
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='w-full font-bold mt-36 lg:mt-96'>
+            <h4 className='text-4xl mb-10 text-primary'>Post Your Blog </h4>
+            <form onSubmit={handleSubmit(onSubmit)}
+                className='w-11/12 lg:w-3/4 mx-auto'>
+                {/* Blog heading */}
+                <div className="form-control w-full max-w-md mx-auto">
+                    <label className="label">
+                        <span className="label-text">Blog Heading</span>
+                    </label>
+                    <input
+                        type={"text"}
+                        placeholder="Write Your Blog Heading"
+                        className="input input-bordered input-primary w-full max-w-md text-sm"
+                        {...register("blog_heading", {
+                            required: {
+                                value: true,
+                                message: 'Heading is required'
+                            }
+                        })}
+                    />
+                    <label className="label">
+                        {errors.blog_heading?.type === 'required' && <span className="label-text-alt text-red-700">{errors.blog_heading.message}</span>}
+                    </label>
+                </div>
+                {/* blog body */}
+                <div className="form-control w-full max-w-md mx-auto">
+                    <label className="label">
+                        <span className="label-text">Blog</span>
+                    </label>
+                    <textarea
+                        type={"text"}
+                        placeholder="Write Your Blog here"
+                        className="textarea textarea-primary w-full max-w-md  text-sm h-48"
+                        {...register("blog_body", {
+                            required: {
+                                value: true,
+                                message: 'Blog is required'
+                            }
+                        })}
+                    />
+                    <label className="label">
+                        {errors.blog_body?.type === 'required' && <span className="label-text-alt text-red-700">{errors.blog_body.message}</span>}
+                    </label>
+                </div>
+                {/* blog related to skill field */}
+                <div className="form-control w-full max-w-md mx-auto">
+                    <label className="label">
+                        <span className="label-text">Skill Field/Topic</span>
+                    </label>
+                    <input
+                        type={"text"}
+                        placeholder="Write Your Blog Blongs to field"
+                        className="input input-bordered input-primary w-full max-w-md  text-sm"
+                        {...register("topic", {
+                            required: {
+                                value: true,
+                                message: 'topic is required'
+                            }
+                        })}
+                    />
+                    <label className="label">
+                        {errors.topic?.type === 'required' && <span className="label-text-alt text-red-700">{errors.topic.message}</span>}
+                    </label>
+                </div>
 
-            <input defaultValue="test" {...register("example")} />
+                {/* image URLs */}
+                <div className="form-control w-full max-w-md mx-auto">
+                    <label className="label">
+                        <span className="label-text">Provide Image URLs</span>
+                    </label>
+                    <input
+                        type={"text"}
+                        placeholder="Write Your Blog Image Urls"
+                        className="input input-bordered input-primary w-full max-w-md  text-sm"
+                        {...register("img_url", {
+                            required: {
+                                value: true,
+                                message: 'Image Urls is required'
+                            }
+                        })}
+                    />
+                    <label className="label">
+                        {errors.img_url?.type === 'required' && <span className="label-text-alt text-red-700">{errors.img_url.message}</span>}
+                    </label>
+                </div>
+                {/* blog writer */}
+                <div className="form-control w-full max-w-md mx-auto">
+                    <label className="label">
+                        <span className="label-text">Blog Writer</span>
+                    </label>
+                    <input
+                        type="number"
+                        placeholder="example: 1, 9"
+                        className="input input-bordered input-primary w-full max-w-md text-sm"
+                        {...register("blog_creator")}
+                    />
+                </div>
 
-            <input {...register("exampleRequired", { required: true })} />
-
-            <input type="submit" />
-        </form>
+                {/* form submit */}
+                <input className='btn btn-outline btn-primary w-full max-w-md mt-10' type="submit" />
+            </form>
+        </div>
     );
 };
 
