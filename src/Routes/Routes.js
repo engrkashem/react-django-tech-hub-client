@@ -15,6 +15,8 @@ import ProfileUpdate from "../components/Dashboard/ProfileUpdate/ProfileUpdate";
 import PrivateRoutes from "./PrivateRoutes";
 import DashboardLayout from "../Layout/DashboardLayout";
 import WriteBlog from "../components/Dashboard/Dashboard/WriteBlog";
+import CourseLayout from "../Layout/CourseLayout";
+import JobLayout from "../Layout/JobLayout";
 
 const router = createBrowserRouter([
     {
@@ -68,16 +70,28 @@ const router = createBrowserRouter([
                 element: <ProfileUpdate></ProfileUpdate>
             },
             {
-                path: '/dashboard/course',
-                element: <Courses></Courses>
-            },
-            {
                 path: '/dashboard/write-blog',
                 element: <WriteBlog></WriteBlog>
-            },
+            }
+        ]
+    },
+    {
+        path: '/course',
+        element: <PrivateRoutes><CourseLayout></CourseLayout></PrivateRoutes>,
+        children: [
             {
-                path: '/dashboard/jobs',
-                element: <Jobs />
+                path: '/course',
+                element: <Courses></Courses>
+            }
+        ]
+    },
+    {
+        path: '/job',
+        element: <PrivateRoutes><JobLayout></JobLayout></PrivateRoutes>,
+        children: [
+            {
+                path: '/job',
+                element: <Jobs></Jobs>
             }
         ]
     }
