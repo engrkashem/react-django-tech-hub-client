@@ -27,7 +27,8 @@ const CourseCard = ({ course }) => {
     console.log('enrollmentStatus:', enrollmentStatus);
 
 
-    const history = useHistory();
+    
+
     const handleEnroll = () => {
         axios
             .post('http://127.0.0.1:8000/enroll/', {
