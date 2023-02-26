@@ -25,8 +25,8 @@ const Dashboard = () => {
 
 
     return (
-        <div className='pt-40'>
-            <div className='bg-base-100 min-h-screen w-full px-10 mt-[650px] lg:mt-12'>
+        <div className='pt-10 overflow-y-scroll min-h-screen'>
+            <div className='bg-base-100 min-h-screen w-full px-10 mt-12'>
                 {
                     blogs.map(blog => <BlogCard
                         key={blog.id}

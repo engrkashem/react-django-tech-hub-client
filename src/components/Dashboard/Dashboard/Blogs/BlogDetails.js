@@ -10,7 +10,7 @@ const BlogDetails = () => {
     // console.log(blog)
     return (
         <div>
-            <div className=' mb-5 py-5 mt-72 lg:mt-40 px-5 lg:px-20'>
+            <div className=' mb-5 py-5 lg:mt-40 px-5 lg:px-20'>
                 <div className='flex items-center gap-2'>
                     <div className="avatar ">
                         <div className="w-12 rounded-full">

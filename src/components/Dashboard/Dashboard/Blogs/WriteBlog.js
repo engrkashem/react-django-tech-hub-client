@@ -24,7 +24,7 @@ const WriteBlog = () => {
         // console.log(blog);
     }
     return (
-        <div className='w-full font-bold mt-36 lg:mt-96'>
+        <div className='w-full font-bold mt-24 overflow-y-scroll'>
             <h4 className='text-4xl mb-10 text-primary'>Post Your Blog </h4>
             <form onSubmit={handleSubmit(onSubmit)}
                 className='w-11/12 lg:w-3/4 mx-auto'>
