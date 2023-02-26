@@ -65,9 +65,6 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                loader: async () => {
-                    return fetch(`http://127.0.0.1:8000/blog/`)
-                },
                 element: <Dashboard></Dashboard>
             },
             {
