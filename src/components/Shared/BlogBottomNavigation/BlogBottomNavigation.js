@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
-const BlogBottomNavigation = ({ blog, setLoading }) => {
+const BlogBottomNavigation = ({ blog, refetch }) => {
     const navigate = useNavigate()
     const [confirm, setConfirm] = useState(false)
     const [isDelete, setIsDelete] = useState(false)
@@ -19,8 +19,8 @@ const BlogBottomNavigation = ({ blog, setLoading }) => {
             },
             body: ''
         }).then(res => res.json()).then(data => {
+            refetch()
             toast('Your Blog is deleted successfully')
-            setLoading(true)
             navigate('/dashboard')
         })
     }

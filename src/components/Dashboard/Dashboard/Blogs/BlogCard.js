@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import blogPic from '../../../../assets/blogs/blogProfile.png';
 import BlogBottomNavigation from '../../../Shared/BlogBottomNavigation/BlogBottomNavigation';
 
-const BlogCard = ({ blog }) => {
+const BlogCard = ({ blog, refetch }) => {
     const { id, blog_heading, blog_body, post_time, img_url, blog_creator } = blog
     // console.log(blog_body.slice(0, 11))
     const navigate = useNavigate()
@@ -33,6 +33,7 @@ const BlogCard = ({ blog }) => {
             <BlogBottomNavigation
                 key={id}
                 blog={blog}
+                refetch={refetch}
             ></BlogBottomNavigation>
         </div>
     );
