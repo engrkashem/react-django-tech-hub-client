@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 
 const CourseCard = ({ course }) => {
     const [enrollmentStatus, setEnrollmentStatus] = useState(null);
@@ -8,7 +10,7 @@ const CourseCard = ({ course }) => {
 
     useEffect(() => {
         axios
-            .get(`http://127.0.0.1:8000/enroll/?student=${instructor.id}&course=${course.id}`)
+            .get(`http://127.0.0.1:8000/enroll/course=${course.id}`)
             .then(response => {
                 if (response.data.length > 0) {
                     setIsEnrolled(true);
@@ -21,6 +23,11 @@ const CourseCard = ({ course }) => {
             .catch(error => console.error(error));
     }, [instructor.id, course.id]);
 
+    console.log('isEnrolled:', isEnrolled);
+    console.log('enrollmentStatus:', enrollmentStatus);
+
+
+    const history = useHistory();
     const handleEnroll = () => {
         axios
             .post('http://127.0.0.1:8000/enroll/', {
@@ -30,13 +37,13 @@ const CourseCard = ({ course }) => {
             .then(response => {
                 setIsEnrolled(true);
                 setEnrollmentStatus(response.data.message);
+                history.push(`/courses/${course.id}`);
             })
             .catch(error => console.error(error));
     };
 
-
+    return (
         <div className="card w-2/3 bg-base-100 shadow-xl mx-auto grid grid-cols-2 gap-5 m-10 p-5">
-
             <figure className="w-4/3 col-span-1 pl-10">
                 <img src={video_thumbnail_url} alt="thumbnail" />
             </figure>
@@ -48,7 +55,11 @@ const CourseCard = ({ course }) => {
             </div>
             <p>{description.slice(0, 100)}...</p>
             {isEnrolled ? (
-                <p>{enrollmentStatus}</p>
+                <div className="card-actions justify-end">
+                    <button className="btn btn-primary">
+                        Continue Course
+                    </button>
+                </div>
             ) : (
                 <div className="card-actions justify-end">
                     <button className="btn btn-primary" onClick={handleEnroll}>
@@ -56,6 +67,7 @@ const CourseCard = ({ course }) => {
                     </button>
                 </div>
             )}
+            {enrollmentStatus && <p>{enrollmentStatus}</p>}
         </div>
     );
 };
