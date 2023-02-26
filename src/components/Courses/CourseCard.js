@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+
 
 
 const CourseCard = ({ course }) => {
     const [enrollmentStatus, setEnrollmentStatus] = useState(null);
     const [isEnrolled, setIsEnrolled] = useState(false);
+    const navigate = useNavigate()
     const { title, video_thumbnail_url, course_length, instructor, course_fee, description } = course;
 
     useEffect(() => {
@@ -27,7 +29,6 @@ const CourseCard = ({ course }) => {
     console.log('enrollmentStatus:', enrollmentStatus);
 
 
-    const history = useHistory();
     const handleEnroll = () => {
         axios
             .post('http://127.0.0.1:8000/enroll/', {
@@ -37,7 +38,7 @@ const CourseCard = ({ course }) => {
             .then(response => {
                 setIsEnrolled(true);
                 setEnrollmentStatus(response.data.message);
-                history.push(`/courses/${course.id}`);
+                navigate(`/courses/${course.id}`);
             })
             .catch(error => console.error(error));
     };
