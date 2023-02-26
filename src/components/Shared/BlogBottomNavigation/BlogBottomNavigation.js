@@ -29,7 +29,7 @@ const BlogBottomNavigation = ({ blog, setLoading }) => {
     return (
         <div className=' lg:flex items-center justify-between z-10'>
             <div className='flex items-center text-slate-500 gap-3'>
-                <button className=' btn-active  bg-blue-100 rounded-full px-2 text-sm'>{topic}</button>
+                <button className=' btn-active  bg-blue-100 rounded-full px-2 text-sm'>{topic.toUpperCase()}</button>
                 <button className=' text-sm'>10 min read</button>
                 <button className=' text-sm'>Selected for you</button>
             </div>

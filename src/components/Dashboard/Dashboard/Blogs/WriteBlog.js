@@ -7,6 +7,7 @@ const WriteBlog = () => {
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = blog => {
+        blog.topic = blog.topic.toLowerCase()
         const blog_post_url = `http://127.0.0.1:8000/blog/`;
         fetch(blog_post_url, {
             method: 'POST',
