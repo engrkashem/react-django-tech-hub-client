@@ -1,12 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 
 const CourseCard = ({ course }) => {
-    // const course=props.course
-    const { title, video_thumbnail_url, course_length, instructor, course_fee, description } = course
+    const [enrollmentStatus, setEnrollmentStatus] = useState(null);
+    const [isEnrolled, setIsEnrolled] = useState(false);
+    const { title, video_thumbnail_url, course_length, instructor, course_fee, description } = course;
+
+    useEffect(() => {
+        axios
+            .get(`http://127.0.0.1:8000/enroll/course=${course.id}`)
+            .then(response => {
+                if (response.data.length > 0) {
+                    setIsEnrolled(true);
+                    setEnrollmentStatus('You are already enrolled in this course');
+                } else {
+                    setIsEnrolled(false);
+                    setEnrollmentStatus(null);
+                }
+            })
+            .catch(error => console.error(error));
+    }, [instructor.id, course.id]);
+
+    console.log('isEnrolled:', isEnrolled);
+    console.log('enrollmentStatus:', enrollmentStatus);
+
+
+    const history = useHistory();
+    const handleEnroll = () => {
+        axios
+            .post('http://127.0.0.1:8000/enroll/', {
+                course: course.id,
+                student: instructor.id,
+            })
+            .then(response => {
+                setIsEnrolled(true);
+                setEnrollmentStatus(response.data.message);
+                history.push(`/courses/${course.id}`);
+            })
+            .catch(error => console.error(error));
+    };
+
     return (
-
         <div className="card w-2/3 bg-base-100 shadow-xl mx-auto grid grid-cols-2 gap-5 m-10 p-5">
-
             <figure className="w-4/3 col-span-1 pl-10">
                 <img src={video_thumbnail_url} alt="thumbnail" />
             </figure>
@@ -17,9 +54,20 @@ const CourseCard = ({ course }) => {
                 <p>Course fees: <span>{course_fee} TK</span></p>
             </div>
             <p>{description.slice(0, 100)}...</p>
-            <div className="card-actions justify-end">
-                <button className="btn btn-primary">Enroll Now</button>
-            </div>
+            {isEnrolled ? (
+                <div className="card-actions justify-end">
+                    <button className="btn btn-primary">
+                        Continue Course
+                    </button>
+                </div>
+            ) : (
+                <div className="card-actions justify-end">
+                    <button className="btn btn-primary" onClick={handleEnroll}>
+                        Enroll Now
+                    </button>
+                </div>
+            )}
+            {enrollmentStatus && <p>{enrollmentStatus}</p>}
         </div>
     );
 };
