@@ -34,8 +34,9 @@ const CourseCard = ({ course }) => {
             .catch(error => console.error(error));
     };
 
-    return (
-        <div className="card w-2/3 bg-base-100 shadow-xl mx-auto grid grid-cols-2 gap-5">
+
+        <div className="card w-2/3 bg-base-100 shadow-xl mx-auto grid grid-cols-2 gap-5 m-10 p-5">
+
             <figure className="w-4/3 col-span-1 pl-10">
                 <img src={video_thumbnail_url} alt="thumbnail" />
             </figure>

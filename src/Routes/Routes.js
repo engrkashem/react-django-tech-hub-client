@@ -14,7 +14,11 @@ import Main from "../Layout/Main";
 import ProfileUpdate from "../components/Dashboard/ProfileUpdate/ProfileUpdate";
 import PrivateRoutes from "./PrivateRoutes";
 import DashboardLayout from "../Layout/DashboardLayout";
-import WriteBlog from "../components/Dashboard/Dashboard/WriteBlog";
+import WriteBlog from "../components/Dashboard/Dashboard/Blogs/WriteBlog";
+import CourseLayout from "../Layout/CourseLayout";
+import JobLayout from "../Layout/JobLayout";
+import BlogDetails from "../components/Dashboard/Dashboard/Blogs/BlogDetails";
+import UpdateBlog from "../components/Dashboard/Dashboard/Blogs/UpdateBlog";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +65,9 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
+                loader: async () => {
+                    return fetch(`http://127.0.0.1:8000/blog/`)
+                },
                 element: <Dashboard></Dashboard>
             },
             {
@@ -68,16 +75,40 @@ const router = createBrowserRouter([
                 element: <ProfileUpdate></ProfileUpdate>
             },
             {
-                path: '/dashboard/course',
-                element: <Courses></Courses>
-            },
-            {
                 path: '/dashboard/write-blog',
                 element: <WriteBlog></WriteBlog>
             },
             {
-                path: '/dashboard/jobs',
-                element: <Jobs />
+                path: '/dashboard/blog-detail/:blogId',
+                loader: async ({ params }) => {
+                    return fetch(`http://127.0.0.1:8000/blog/${params.blogId}`)
+                },
+                element: <BlogDetails></BlogDetails>
+            },
+            {
+                path: '/dashboard/update-blog/:blogId',
+                loader: async ({ params }) => fetch(`http://127.0.0.1:8000/blog/${params.blogId}`),
+                element: <UpdateBlog></UpdateBlog>
+            }
+        ]
+    },
+    {
+        path: '/course',
+        element: <PrivateRoutes><CourseLayout></CourseLayout></PrivateRoutes>,
+        children: [
+            {
+                path: '/course',
+                element: <Courses></Courses>
+            }
+        ]
+    },
+    {
+        path: '/job',
+        element: <PrivateRoutes><JobLayout></JobLayout></PrivateRoutes>,
+        children: [
+            {
+                path: '/job',
+                element: <Jobs></Jobs>
             }
         ]
     }

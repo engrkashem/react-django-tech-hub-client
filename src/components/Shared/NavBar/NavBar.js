@@ -18,10 +18,10 @@ const NavBar = () => {
             user ?
                 <React.Fragment>
                     <li><Link to={'/dashboard'}>Blogs</Link></li>
-                    <li><Link to={'/dashboard/course'}>Courses</Link></li>
-                    <li><Link to={'/dashboard/jobs'} > Jobs </Link></li>
-                    <li><Link to={'/jobs'} > Messaging </Link></li>
-                    <li><Link to={'/jobs'} > Notifications </Link></li>
+                    <li><Link to={'/course'}>Courses</Link></li>
+                    <li><Link to={'/job'} > Jobs </Link></li>
+                    <li><Link to={'/job'} > Messaging </Link></li>
+                    <li><Link to={'/job'} > Notifications </Link></li>
                     <div className="dropdown dropdown-end dropdown-hover">
                         <div tabIndex={0} className="avatar">
                             <div className="w-10 rounded-full ring ring-primary">
@@ -48,7 +48,7 @@ const NavBar = () => {
 
     </>
     return (
-        <div className="navbar bg-base-100 border-b border-blue-50">
+        <div className="navbar bg-base-100 border-b border-blue-50 fixed z-50">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
