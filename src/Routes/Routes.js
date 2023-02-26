@@ -19,6 +19,7 @@ import CourseLayout from "../Layout/CourseLayout";
 import JobLayout from "../Layout/JobLayout";
 import BlogDetails from "../components/Dashboard/Dashboard/Blogs/BlogDetails";
 import UpdateBlog from "../components/Dashboard/Dashboard/Blogs/UpdateBlog";
+import CourseDetail from "../components/Courses/CourseDetail";
 
 const router = createBrowserRouter([
     {
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
             {
                 path: '/course',
                 element: <Courses></Courses>
+            },
+            {
+                path: '/course/:courseId',
+                element: <CourseDetail></CourseDetail>
             }
         ]
     },
