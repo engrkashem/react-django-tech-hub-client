@@ -1,15 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
-import BlogCard from './BlogCard';
+// import { useQuery } from '@tanstack/react-query';
+import { useLoaderData } from 'react-router-dom';
+import BlogCard from './Blogs/BlogCard';
 
 
 const Dashboard = () => {
-    const all_blog_url = `http://127.0.0.1:8000/blog/`;
+    const blogs = useLoaderData()
 
-    const { data: blogs = [] } = useQuery({
-        queryKey: ['blog'],
-        queryFn: () => fetch(all_blog_url).then(res => res.json())
-    })
-    console.log(blogs)
+    // const all_blog_url = `http://127.0.0.1:8000/blog/`;
+
+    // const { data: blogs = [] } = useQuery({
+    //     queryKey: ['blog'],
+    //     queryFn: () => fetch(all_blog_url).then(res => res.json())
+    // })
+    // console.log(blogs)
 
 
 
