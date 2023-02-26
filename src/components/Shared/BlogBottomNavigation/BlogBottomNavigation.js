@@ -1,13 +1,33 @@
-import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
-const BlogBottomNavigation = ({ blog }) => {
+const BlogBottomNavigation = ({ blog, setLoading }) => {
     const navigate = useNavigate()
+    const [confirm, setConfirm] = useState(false)
+    const [isDelete, setIsDelete] = useState(false)
+
     const { id, topic } = blog
 
-    // console.log(id)
+    if (isDelete) {
+        // console.log(isDelete)
+        fetch(`http://127.0.0.1:8000/blog/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: ''
+        }).then(res => res.json()).then(data => {
+            toast('Your Blog is deleted successfully')
+            setLoading(true)
+            navigate('/dashboard')
+        })
+    }
+
+    // console.log(confirm, isDelete)
     return (
-        <div className=' lg:flex items-center justify-between '>
+        <div className=' lg:flex items-center justify-between z-10'>
             <div className='flex items-center text-slate-500 gap-3'>
                 <button className=' btn-active  bg-blue-100 rounded-full px-2 text-sm'>{topic}</button>
                 <button className=' text-sm'>10 min read</button>
@@ -31,11 +51,17 @@ const BlogBottomNavigation = ({ blog }) => {
                     </svg>
                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-36">
                         <li ><button onClick={() => navigate(`/dashboard/update-blog/${id}`)} className=' hover:bg-blue-50'>Update Blog </button></li>
-                        <li><button className=' hover:bg-blue-50'>Delete Blog </button></li>
+                        <li><button onClick={() => setConfirm(true)} className=' hover:bg-blue-50'>Delete Blog </button></li>
                     </ul>
                 </div>
 
             </div>
+            {
+                confirm && <ConfirmModal
+                    setConfirm={setConfirm}
+                    setIsDelete={setIsDelete}
+                ></ConfirmModal>
+            }
         </div>
     );
 };

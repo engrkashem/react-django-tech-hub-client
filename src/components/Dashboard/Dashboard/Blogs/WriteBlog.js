@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const WriteBlog = () => {
@@ -14,7 +15,11 @@ const WriteBlog = () => {
             },
             body: JSON.stringify(blog)
         }).then(res => res.json()).then(data => {
-            data && navigate('/dashboard')
+            if (data) {
+                toast.success('You Blog is Posted Successfully')
+                navigate('/dashboard')
+            }
+            else toast.error('Unauthorized Blog Post')
         })
         // console.log(blog);
     }
