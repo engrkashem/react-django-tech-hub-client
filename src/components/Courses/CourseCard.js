@@ -2,43 +2,42 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 
-
-
 const CourseCard = ({ course }) => {
     const [enrollmentStatus, setEnrollmentStatus] = useState(null);
     const [isEnrolled, setIsEnrolled] = useState(false);
     const navigate = useNavigate()
-    const { title, video_thumbnail_url, course_length, instructor, course_fee, description } = course;
+    const { id,title, video_thumbnail_url, course_length, instructor, course_fee, description } = course;
 
     useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/enroll/course=${course.id}`)
-            .then(response => {
-                if (response.data.length > 0) {
-                    setIsEnrolled(true);
-                    setEnrollmentStatus('You are already enrolled in this course');
-                } else {
-                    setIsEnrolled(false);
-                    setEnrollmentStatus(null);
-                }
-            })
-            .catch(error => console.error(error));
+        const storageEnrollment = localStorage.getItem(`enrollment-${course.id}`);
+        if (storageEnrollment) {
+            setIsEnrolled(true);
+            setEnrollmentStatus('You are already enrolled in this course');
+        } else {
+            axios.get(`http://127.0.0.1:8000/enroll/course=${course.id}`)
+                .then(response => {
+                    if (response.data.length > 0) {
+                        setIsEnrolled(true);
+                        setEnrollmentStatus('You are already enrolled in this course');
+                        localStorage.setItem(`enrollment-${course.id}`, true);
+                    } else {
+                        setIsEnrolled(false);
+                        setEnrollmentStatus(null);
+                    }
+                })
+                .catch(error => console.error(error));
+        }
     }, [instructor.id, course.id]);
 
-    console.log('isEnrolled:', isEnrolled);
-    console.log('enrollmentStatus:', enrollmentStatus);
-
-
     const handleEnroll = () => {
-        axios
-            .post('http://127.0.0.1:8000/enroll/', {
-                course: course.id,
-                student: instructor.id,
-            })
+        axios.post('http://127.0.0.1:8000/enroll/', {
+            course: course.id,
+            student: instructor.id,
+        })
             .then(response => {
                 setIsEnrolled(true);
                 setEnrollmentStatus(response.data.message);
-                navigate(`/courses/${course.id}`);
+                localStorage.setItem(`enrollment-${course.id}`, true);
             })
             .catch(error => console.error(error));
     };
@@ -57,7 +56,7 @@ const CourseCard = ({ course }) => {
             <p>{description.slice(0, 100)}...</p>
             {isEnrolled ? (
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary" onClick={() => navigate(`/course/${id}`)}>
                         Continue Course
                     </button>
                 </div>
@@ -69,8 +68,7 @@ const CourseCard = ({ course }) => {
                 </div>
             )}
             {enrollmentStatus && <p>{enrollmentStatus}</p>}
-        </div>
-    );
-};
-
+         </div>
+     );
+ };
 export default CourseCard;
