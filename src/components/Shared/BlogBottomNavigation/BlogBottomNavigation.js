@@ -3,12 +3,14 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
-const BlogBottomNavigation = ({ blog, setLoading }) => {
+const BlogBottomNavigation = ({ blog }) => {
     const navigate = useNavigate()
     const [confirm, setConfirm] = useState(false)
     const [isDelete, setIsDelete] = useState(false)
+    const [like, setLike] = useState(blog.liked)
 
-    const { id, topic } = blog
+    const { id, topic, liked, blog_body, blog_creator } = blog
+    // console.log(blog_creator.id)
 
     if (isDelete) {
         // console.log(isDelete)
@@ -20,9 +22,28 @@ const BlogBottomNavigation = ({ blog, setLoading }) => {
             body: ''
         }).then(res => res.json()).then(data => {
             toast('Your Blog is deleted successfully')
-            setLoading(true)
             navigate('/dashboard')
         })
+    }
+
+    const handleLiked = () => {
+        const updated_blog = {
+            liked: liked + 1,
+            blog_body: blog_body,
+            blog_creator: blog_creator.id
+        }
+        const url = `http://127.0.0.1:8000/blog/${id}`
+        fetch(url, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updated_blog)
+        }).then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                setLike(like + 1)
+            })
     }
 
     // console.log(confirm, isDelete)
@@ -30,7 +51,13 @@ const BlogBottomNavigation = ({ blog, setLoading }) => {
         <div className=' lg:flex items-center justify-between z-10'>
             <div className='flex items-center text-slate-500 gap-3'>
                 <button className=' btn-active  bg-blue-100 rounded-full px-2 text-sm'>{topic.toUpperCase()}</button>
-                <button className=' text-sm'>10 min read</button>
+                <button className=' text-sm flex items-center gap-1'>
+                    <span className=' font-semibold'>{like}</span>
+                    <svg onClick={handleLiked} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-rose-700">
+                        <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                    </svg>
+
+                </button>
                 <button className=' text-sm'>Selected for you</button>
             </div>
             <div className='flex gap-3 text-slate-500 text-sm my-5'>
