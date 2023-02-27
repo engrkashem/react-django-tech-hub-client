@@ -12,13 +12,13 @@ const CourseCard = ({ course }) => {
         const storageEnrollment = localStorage.getItem(`enrollment-${course.id}`);
         if (storageEnrollment) {
             setIsEnrolled(true);
-            setEnrollmentStatus('You are already enrolled in this course');
+            // setEnrollmentStatus('You are already enrolled in this course');
         } else {
             axios.get(`http://127.0.0.1:8000/enroll/course=${course.id}`)
                 .then(response => {
                     if (response.data.length > 0) {
                         setIsEnrolled(true);
-                        setEnrollmentStatus('You are already enrolled in this course');
+                        // setEnrollmentStatus('You are already enrolled in this course');
                         localStorage.setItem(`enrollment-${course.id}`, true);
                     } else {
                         setIsEnrolled(false);
