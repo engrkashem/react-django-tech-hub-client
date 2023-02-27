@@ -1,5 +1,6 @@
 // import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 // import { useLoaderData } from 'react-router-dom';
 import BlogCard from './Blogs/BlogCard';
 
@@ -20,6 +21,7 @@ const Dashboard = () => {
         fetch(url).then(res => res.json()).then(data => {
             if (data.length === 0) {
                 setSearchText('')
+                toast.error('No Blog is found. Showing all Blogs')
             }
             setBlogs(data)
         })
