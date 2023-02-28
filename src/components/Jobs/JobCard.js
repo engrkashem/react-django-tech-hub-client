@@ -8,7 +8,7 @@ const JobCard = ({ job }) => {
     const date_diff = Math.floor(time_diff / (1000 * 3600 * 24))
     // console.log(date_diff)
     return (
-        <div className="border rounded-md mb-10 text-left p-5 shadow-md">
+        <div>
             <div className="flex justify-between">
                 <h1 className="font-bold text-lg">{title}</h1>
                 <span className="font-normal bg-gray-100 text-xs py-1 pr-2 block shadow border rounded">
