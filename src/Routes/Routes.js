@@ -100,6 +100,10 @@ const router = createBrowserRouter([
             },
             {
                 path: '/course/:courseId',
+                loader: async ({ params }) => {
+                    // console.log(params.courseId)
+                    return fetch(`http://127.0.0.1:8000/course/${params.courseId}/`)
+                },
                 element: <CourseDetail></CourseDetail>
             }
         ]
