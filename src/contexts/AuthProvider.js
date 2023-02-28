@@ -57,7 +57,7 @@ const AuthProvider = ({ children }) => {
         setDbUser,
         dbUser
     }
-    console.log(dbUser)
+    // console.log(dbUser)
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
