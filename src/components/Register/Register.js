@@ -11,7 +11,7 @@ const Register = () => {
 
     const [registerErr, setRegisterErr] = useState('');
 
-    const { createUser, signInWithGoogle, updateUserProfile } = useContext(AuthContext);
+    const { createUser, signInWithGoogle, updateUserProfile, setDbUser } = useContext(AuthContext);
 
     const location = useLocation();
     const from = location.state?.from?.pathname || '/dashboard';
@@ -29,6 +29,22 @@ const Register = () => {
                     updateUserProfile(userInfo)
                         .then(() => { })
                         .catch(e => { });
+
+                    const userInfoDb = {
+                        userName: name,
+                        email: email
+                    }
+                    fetch(`http://127.0.0.1:8000/user/`, {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(userInfoDb)
+                    }).then(res => res.json()).then(data => {
+                        console.log(data)
+                        setDbUser(data)
+                    })
+
                     navigate(from, { replace: true });
                 })
                 .catch(error => {
@@ -47,6 +63,22 @@ const Register = () => {
             .then((res) => {
                 // const user = res.user;
                 console.log(res);
+                const { displayName, email, photoURL } = res?.user
+                const userInfo = {
+                    userName: displayName,
+                    email: email,
+                    photo_url: photoURL
+                }
+                fetch(`http://127.0.0.1:8000/user/`, {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                }).then(res => res.json()).then(data => {
+                    console.log(data)
+                    setDbUser(data)
+                })
                 navigate(from, { replace: true })
             }).catch((error) => {
                 setRegisterErr(error.message)

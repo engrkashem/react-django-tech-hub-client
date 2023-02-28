@@ -4,13 +4,16 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 
 const NavBar = () => {
-    const { user, LogOut } = useContext(AuthContext);
+    const { user, LogOut, setDbUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
     const handleSignout = () => {
         LogOut()
-            .then(() => { navigate('/') })
+            .then(() => {
+                setDbUser(null)
+                navigate('/')
+            })
             .catch(e => { })
     }
     const menuItems = <>
