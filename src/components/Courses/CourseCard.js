@@ -40,6 +40,7 @@ const CourseCard = ({ course }) => {
                 localStorage.setItem(`enrollment-${course.id}`, true);
             })
             .catch(error => console.error(error));
+
     };
 
     return (
