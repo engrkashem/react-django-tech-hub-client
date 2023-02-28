@@ -14,7 +14,7 @@ const Courses = () => {
     }, []);
 
     return (
-        <div className='nim-h-screen w-full grid grid-cols-1 overflow-y-scroll gap-5 ' style={{ height: '100vh' }}>
+        <div className='nim-h-screen w-full grid grid-cols-1 gap-5 ' style={{ height: '100vh' }}>
             {
                 courses?.map(course => <CourseCard
                     key={course.id}

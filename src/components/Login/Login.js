@@ -9,7 +9,7 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const { signIn, signInWithGoogle } = useContext(AuthContext);
+    const { signIn, signInWithGoogle, setDbUser } = useContext(AuthContext);
 
     const [loginErr, setLoginErr] = useState('');
 
@@ -40,7 +40,23 @@ const Login = () => {
         signInWithGoogle()
             .then((res) => {
                 // const user = res.user;
-                console.log(res);
+                console.log(res.user);
+                const { displayName, email, photoURL } = res?.user
+                const userInfo = {
+                    userName: displayName,
+                    email: email,
+                    photo_url: photoURL
+                }
+                fetch(`http://127.0.0.1:8000/user/`, {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                }).then(res => res.json()).then(data => {
+                    console.log(data)
+                    setDbUser(data)
+                })
                 navigate(from, { replace: true });
             }).catch((error) => {
                 setLoginErr(error.message)
