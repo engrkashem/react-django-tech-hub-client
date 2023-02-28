@@ -2,19 +2,19 @@ import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const CourseDetail = () => {
+const CourseDetail = ({id}) => {
     const courseId = useParams()
     const [course, setCourse] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/course/course=${courseId}`)
+        axios.get(`http://127.0.0.1:8000/course/${id}/`)
             .then(response => {
                 setCourse(response.data.course);
             })
             .catch(error => {
                 console.log(error);
             });
-    }, [courseId]);
+    }, [id]);
 
     if (!course) {
         return <div>Loading...</div>;
