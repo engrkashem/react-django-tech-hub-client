@@ -2,6 +2,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import CreateJob from './CreateJob';
 import Description from './Description';
 import JobCard from './JobCard';
 
@@ -41,7 +42,7 @@ const Jobs = () => {
 
         <div className='grid lg:grid-cols-3 gap-4 lg:px-40 m-3 min-h-screen pt-11 scroll-smooth	'>
             <div className='lg:col-span-1 p-2 block overflow-auto max-h-screen scrollbar-none '> 
-                <form onSubmit={handleSubmit(handleSearch)} className=' flex items-center justify-center pt-6 mb-10'>
+                <form onSubmit={handleSubmit(handleSearch)} className=' flex items-center justify-center pt-6 mb-5'>
                     <input type="text" placeholder="Search with your job skill" className="input border rounded-full input-primary w-full max-w-md" name='search' {...register("search", {
                         required: {
                             value: false
@@ -52,6 +53,10 @@ const Jobs = () => {
                         <MagnifyingGlassIcon className='w-4 h-4'></MagnifyingGlassIcon>
                     </button>
                 </form>
+
+                <button className='w-full btn btn-primary mb-5 text-white rounded-full' onClick={()=>setId('')}>
+                    Create New Job
+                </button>
 
                 <div>
                     {
@@ -74,14 +79,16 @@ const Jobs = () => {
             </div>
             
             <div className='lg:col-span-2 flex w-full lg:mx-10 sm:hidden lg:block'>
-                <div className="p-10 border mt-10 border-grey-100 mx-10 rounded w-full lg:min-h-screen ">
+                <div className="p-10 border mt-10 border-grey-100 mx-10 rounded w-full lg:min-h-screen shadow  overflow-auto lg:max-h-screen scrollbar-none">
                     {/* <div className="divider lg:divider-horizontal w-0 min-h-screen"></div> */}
                     {/* <div className='mt-15 p-2'> */}
                     {
-                        isId && <Description
+                        isId ?<Description
                         key={isId}
                         id = {isId}
                         ></Description>
+                        : <CreateJob>
+                        </CreateJob>
                     }
                         
                     {/* </div> */}

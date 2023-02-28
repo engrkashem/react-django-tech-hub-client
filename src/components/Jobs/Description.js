@@ -37,16 +37,25 @@ const Description = ({id})=>{
                 <h2 className="text-2xl font-bold">{isJob.title}</h2>
                 <h3 className="">{isJob.location}</h3>
             </div>
-            <div className="text-left mt-16">
+            <div className="text-left mt-16 ">
                 <h3 className="text-lg font-bold">Job Details:</h3>
-                <p>
+                <text>
                 {isJob.content}
-                </p>
+                </text>
                 
-                <h3 className="text-lg font-bold">Requirements:</h3>
-                <p className="">{isJob.skill_requirements}</p>
+                <h3 className="text-lg font-bold mt-5">Requirements:</h3>
+                <text className="">{isJob.skill_requirements}</text>
+
+                <h3 className="text-lg font-bold mt-5">About Company:</h3>
+                <p className="">{isJob.about_company}</p>
             </div>
-            
+            <div className="border border-gray-200 p-4 flex mt-10 rounded shadow content-end">
+                <img src={isJob.creator?.photo_url} alt="User" className="w-12 h-12 rounded-full"/>
+                <div className="mx-2">
+                    <h3 className="font-bold text-lg text-left">{isJob.creator?.userName}</h3>
+                    <h4 className="">{isJob.creator?.user_role}</h4>
+                </div>
+            </div>
         </div>
     )
 }
