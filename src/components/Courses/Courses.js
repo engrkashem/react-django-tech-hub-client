@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 const Courses = () => {
     const [courses, setCourses] = useState([]);
     const { dbUser } = useContext(AuthContext)
-    console.log(dbUser)
+    // console.log(dbUser)
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/course/')
             .then(response => {
@@ -20,7 +20,7 @@ const Courses = () => {
         fetch('http://127.0.0.1:8000/enroll/')
             .then(res => res.json())
             .then(data => {
-                console.log(data?.enroll)
+                // console.log(data?.enroll)
             })
     }, [])
 
