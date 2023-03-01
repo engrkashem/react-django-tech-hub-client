@@ -3,14 +3,14 @@ import { useQuery } from "react-query";
 import { BriefcaseIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { AuthContext } from "../../contexts/AuthProvider";
 
-const Description = ({id})=>{
+const Description = ({id, update})=>{
     const [isJob, setJob] = useState('');
     const { user } = useContext(AuthContext);
     useEffect(() => {
         const url = `http://127.0.0.1:8000/job/${id}/`;
         fetch(url).then(res => res.json()).then(data => {
                 setJob(data)
-                console.log(data)
+                // console.log(data)
         })
     }, [id])
 
@@ -24,11 +24,18 @@ const Description = ({id})=>{
         }
         fetch(url, request).then(res => res.json())
         .then(data => {
-                console.log(data)
+                // console.log(data)
                 window.location.reload(true)
         })
 
     }
+
+    const handleUpdate = data =>
+    {
+        update(data)
+    }
+
+
     return (
         <div className="">
         
@@ -47,9 +54,15 @@ const Description = ({id})=>{
                 </div>
                 {
                     user.email == isJob.creator?.email ? 
-                    <button className="btn bg-red-600 border-0 text-white" onClick={()=>handleDelete(isJob.id)}>
-                    Delete
-                    </button> :
+                    <div className="">
+                        <button className="btn btn-primary text-white" onClick={()=>handleUpdate(isJob)}>
+                        Update
+                        </button>
+                        <button className="btn bg-red-600 border-0 text-white mx-4" onClick={()=>handleDelete(isJob.id)}>
+                        Delete
+                        </button>
+                    </div>
+                     :
                     <button className="btn btn-primary text-white">
                     Apply Now
                     </button>
@@ -63,9 +76,9 @@ const Description = ({id})=>{
             </div>
             <div className="text-left mt-16 ">
                 <h3 className="text-lg font-bold">Job Details:</h3>
-                <text>
+                <p className="whitespace-pre-wrap">
                 {isJob.content}
-                </text>
+                </p>
                 
                 <h3 className="text-lg font-bold mt-5">Requirements:</h3>
                 <text className="">{isJob.skill_requirements}</text>

@@ -5,11 +5,13 @@ import { useForm } from 'react-hook-form';
 import CreateJob from './CreateJob';
 import Description from './Description';
 import JobCard from './JobCard';
+import UpdateJob from './UpdateJob';
 
 const Jobs = () => {
     const [isErr, setErr] = useState('')
     const [isId, setId] = useState('')
     const [isSearch, setSearch] = useState('');
+    const [isUpdate, setUpdate] = useState('');
     const { register, formState: { errors }, handleSubmit } = useForm();
     const jobs_url = `http://127.0.0.1:8000/job/?search=`;
     const { data: jobs = [] } = useQuery({
@@ -35,12 +37,21 @@ const Jobs = () => {
         // id.preventDefault();
         // console.log(id)
         setId(id);
+        setUpdate('');
 
     }
 
+    const handleCreate = () =>
+    {
+        setId('');
+        setUpdate('');
+
+    }
+    // console.log(isUpdate);
+
     return (
 
-        <div className='grid lg:grid-cols-3 gap-4 lg:px-40 m-3 min-h-screen pt-11 scroll-smooth	drawer drawer-mobile'>
+        <div className='grid lg:grid-cols-3 gap-4 lg:px-40 m-3 min-h-screen pt-11 scroll-smooth'>
             <div className='lg:col-span-1 p-2 block overflow-auto max-h-screen scrollbar-none '> 
                 <form onSubmit={handleSubmit(handleSearch)} className=' flex items-center justify-center pt-6 mb-5'>
                     <input type="text" placeholder="Search with your job skill" className="input border rounded-full input-primary w-full max-w-md" name='search' {...register("search", {
@@ -54,7 +65,7 @@ const Jobs = () => {
                     </button>
                 </form>
 
-                <button className='w-full btn btn-primary mb-5 text-white rounded-full' onClick={()=>setId('')}>
+                <button className='w-full btn btn-primary mb-5 text-white rounded-full' onClick={()=>handleCreate()}>
                     Create New Job
                 </button>
 
@@ -79,17 +90,28 @@ const Jobs = () => {
             </div>
             
 
-            <div className='lg:col-span-2 flex w-full lg:mx-10 sm:hidden lg:block drawer-side'>
-                <div className="p-10 border mt-10 border-grey-100 mx-10 rounded w-full lg:min-h-screen shadow  overflow-auto lg:max-h-screen scrollbar-none">
+            <div className='lg:col-span-2 flex w-full lg:mx-10 sm:hidden lg:block'>
+                <div className="p-10 border mt-10 border-grey-100 mx-10 rounded w-full lg:min-h-screen shadow lg:max-h-screen overflow-auto scrollbar-none">
                     {/* <div className="divider lg:divider-horizontal w-0 min-h-screen"></div> */}
                     {/* <div className='mt-15 p-2'> */}
-                    {
-                        isId ?<Description
-                        key={isId}
-                        id = {isId}
-                        ></Description>
-                        : <CreateJob>
-                        </CreateJob>
+                    {   
+                        isUpdate ?
+                        <UpdateJob
+                        key = {isUpdate.id}
+                        data = {isUpdate}
+                        >
+
+                        </UpdateJob>
+                        :
+                        <>
+                            {isId ?<Description
+                            key={isId}
+                            id = {isId}
+                            update = {setUpdate}
+                            ></Description>
+                            : <CreateJob>
+                            </CreateJob>}
+                        </>
                     }
                         
                     {/* </div> */}
