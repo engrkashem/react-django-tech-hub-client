@@ -5,14 +5,14 @@ import BlogBottomNavigation from '../../../Shared/BlogBottomNavigation/BlogBotto
 
 const BlogCard = ({ blog }) => {
     const { id, blog_heading, blog_body, post_time, img_url, blog_creator } = blog
-    // console.log(blog_body.slice(0, 11))
+    // console.log(blog_creator.photo_url)
     const navigate = useNavigate()
     return (
         <div className=' border-b border-blue-100 mb-5 p-5'>
             <div className='flex items-center gap-2'>
                 <div className="avatar ">
                     <div className="w-12 rounded-full">
-                        <img src={blogPic} alt='' />
+                        <img src={blog_creator?.photo_url || blogPic} alt='' />
                     </div>
                 </div>
                 <h5>{blog_creator.userName}</h5>

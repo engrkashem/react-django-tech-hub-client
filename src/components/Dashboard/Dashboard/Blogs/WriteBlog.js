@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../contexts/AuthProvider';
 
 const WriteBlog = () => {
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { dbUser } = useContext(AuthContext)
+    // console.log(dbUser)
     const onSubmit = blog => {
+        // console.log(blog)
         blog.topic = blog.topic.toLowerCase()
         const blog_post_url = `http://127.0.0.1:8000/blog/`;
         fetch(blog_post_url, {
@@ -111,13 +115,15 @@ const WriteBlog = () => {
                     </label>
                 </div>
                 {/* blog writer */}
-                <div className="form-control w-full max-w-md mx-auto">
+                <div className="form-control w-full max-w-md mx-auto hidden">
                     <label className="label">
                         <span className="label-text">Blog Writer</span>
                     </label>
                     <input
                         type="number"
                         placeholder="example: 1, 9"
+                        defaultValue={dbUser?.id || 4}
+                        value={dbUser?.id || 4}
                         className="input input-bordered input-primary w-full max-w-md text-sm"
                         {...register("blog_creator")}
                     />
