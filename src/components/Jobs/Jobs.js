@@ -40,7 +40,7 @@ const Jobs = () => {
 
     return (
 
-        <div className='grid lg:grid-cols-3 gap-4 lg:px-40 m-3 min-h-screen pt-11 scroll-smooth	'>
+        <div className='grid lg:grid-cols-3 gap-4 lg:px-40 m-3 min-h-screen pt-11 scroll-smooth	drawer drawer-mobile'>
             <div className='lg:col-span-1 p-2 block overflow-auto max-h-screen scrollbar-none '> 
                 <form onSubmit={handleSubmit(handleSearch)} className=' flex items-center justify-center pt-6 mb-5'>
                     <input type="text" placeholder="Search with your job skill" className="input border rounded-full input-primary w-full max-w-md" name='search' {...register("search", {
@@ -78,7 +78,8 @@ const Jobs = () => {
                     
             </div>
             
-            <div className='lg:col-span-2 flex w-full lg:mx-10 sm:hidden lg:block'>
+
+            <div className='lg:col-span-2 flex w-full lg:mx-10 sm:hidden lg:block drawer-side'>
                 <div className="p-10 border mt-10 border-grey-100 mx-10 rounded w-full lg:min-h-screen shadow  overflow-auto lg:max-h-screen scrollbar-none">
                     {/* <div className="divider lg:divider-horizontal w-0 min-h-screen"></div> */}
                     {/* <div className='mt-15 p-2'> */}

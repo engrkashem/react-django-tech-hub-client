@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { BriefcaseIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const Description = ({id})=>{
     const [isJob, setJob] = useState('');
+    const { user } = useContext(AuthContext);
     useEffect(() => {
         const url = `http://127.0.0.1:8000/job/${id}/`;
         fetch(url).then(res => res.json()).then(data => {
@@ -12,6 +14,21 @@ const Description = ({id})=>{
         })
     }, [id])
 
+    console.log(user.email);
+
+    const handleDelete = (id) =>
+    {
+        const url = `http://127.0.0.1:8000/job/${id}/`;
+        const request = {
+            method: 'DELETE',
+        }
+        fetch(url, request).then(res => res.json())
+        .then(data => {
+                console.log(data)
+                window.location.reload(true)
+        })
+
+    }
     return (
         <div className="">
         
@@ -28,9 +45,16 @@ const Description = ({id})=>{
                     {isJob.job_type}</span>
         
                 </div>
-                <button className="btn btn-primary text-white">
+                {
+                    user.email == isJob.creator?.email ? 
+                    <button className="btn bg-red-600 border-0 text-white" onClick={()=>handleDelete(isJob.id)}>
+                    Delete
+                    </button> :
+                    <button className="btn btn-primary text-white">
                     Apply Now
-                </button>
+                    </button>
+                }
+                
             </div>
             <div className="divider"></div>
             <div className="">

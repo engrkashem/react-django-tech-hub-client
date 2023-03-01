@@ -17,6 +17,7 @@ const CreateJob = () =>
         fetch(url, request).then(res => res.json())
         .then(data => {
                 console.log(data)
+                window.location.reload(true)
         })
     }
     
