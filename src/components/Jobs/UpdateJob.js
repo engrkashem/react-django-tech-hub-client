@@ -22,7 +22,7 @@ const UpdateJob = ({data}) =>
     
     return(
         <div className="lg:p-5 overflow-auto">
-            <h1 className="font-bold text-3xl text-primary my-5">Post Job</h1>
+            <h1 className="font-bold text-3xl text-primary my-5">Update Job</h1>
             <form className="form-control mx-auto w-4/5" onSubmit={handleSubmit(putJob)}>
                     <label className="label mt-2">
                         <span className="label-text" >Job Title:</span>
@@ -134,7 +134,7 @@ const UpdateJob = ({data}) =>
                     >
                     </input>
 
-                    <button type="submit" className="btn btn-primary text-white mt-5">Create Job</button>
+                    <button type="submit" className="btn btn-primary text-white mt-5">Update Job</button>
                 
             </form>
         </div>
