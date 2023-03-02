@@ -120,10 +120,10 @@ const UpdateJob = ({data}) =>
                     >
                     </input>
 
-                    <label className="label mt-2">
+                    <label className="label mt-2 hidden">
                         <span className="label-text" >Creator Id:</span>
                     </label>
-                    <input type='number' className="input input-bordered input-primary w-full" placeholder="Id of the creator."
+                    <input type='number' className="input input-bordered input-primary w-full hidden" placeholder="Id of the creator."
                     {...register("creator", {
                         required: {
                             valueAsNumber:true,
