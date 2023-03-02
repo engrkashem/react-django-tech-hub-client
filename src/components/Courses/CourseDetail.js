@@ -6,9 +6,9 @@ import ReactPlayer from 'react-player';
 
 const CourseDetail = () => {
     const course = useLoaderData()
-    console.log(course.course)
+    console.log(course)
 
-    const { title, instructor, description, video_playlist_url } = course.course;
+    const { title, instructor, description, video_playlist_url } = course;
 
 
     return (

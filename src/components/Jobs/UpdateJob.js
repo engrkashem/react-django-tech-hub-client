@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const CreateJob = () =>
+const UpdateJob = ({data}) =>
 {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    
-
-    const postJob = (data)=>{
+    console.log(data)
+    const putJob = (jobData)=>{
         data.creator = Number(data.creator)
-        const url = `http://127.0.0.1:8000/job/`;
+        const url = `http://127.0.0.1:8000/job/${data.id}/`;
         const request = {
-            method: 'POST',
+            method: 'PUT',
             headers: {'Content-Type' : 'application/json'},
-            body: JSON.stringify(data)
+            body: JSON.stringify(jobData)
         }
         fetch(url, request).then(res => res.json())
         .then(data => {
@@ -22,9 +21,9 @@ const CreateJob = () =>
     }
     
     return(
-        <div className="lg:p-5">
-            <h1 className="font-bold text-3xl text-primary my-5">Post Job</h1>
-            <form className="form-control mx-auto w-4/5" onSubmit={handleSubmit(postJob)}>
+        <div className="lg:p-5 overflow-auto">
+            <h1 className="font-bold text-3xl text-primary my-5">Update Job</h1>
+            <form className="form-control mx-auto w-4/5" onSubmit={handleSubmit(putJob)}>
                     <label className="label mt-2">
                         <span className="label-text" >Job Title:</span>
                     </label>
@@ -35,6 +34,7 @@ const CreateJob = () =>
                             message: 'This field is required'
                         }
                     })}
+                    defaultValue={data.title}
                     >
                     </input>
 
@@ -48,6 +48,7 @@ const CreateJob = () =>
                             message: 'This field is required'
                         }
                     })}
+                    defaultValue={data.company}
                     >
                     </input>
 
@@ -61,6 +62,7 @@ const CreateJob = () =>
                             message: 'This field is required'
                         }
                     })}
+                    defaultValue={data.about_company}
                     ></textarea>
 
                     <label className="label mt-2">
@@ -73,6 +75,7 @@ const CreateJob = () =>
                             message: 'This field is required'
                         }
                     })}
+                    defaultValue={data.content}
                     ></textarea>
 
                     <label className="label mt-2">
@@ -85,6 +88,7 @@ const CreateJob = () =>
                             message: 'This field is required'
                         }
                     })}
+                    defaultValue={data.skill_requirements}
                     >
                     </input>
                     
@@ -98,6 +102,7 @@ const CreateJob = () =>
                             message: 'This field is required'
                         }
                     })}
+                    defaultValue={data.job_type}
                     >
                     </input>
 
@@ -111,24 +116,25 @@ const CreateJob = () =>
                             message: 'This field is required'
                         }
                     })}
+                    defaultValue={data.location}
                     >
                     </input>
 
-                    <label className="label mt-2">
+                    <label className="label mt-2 hidden">
                         <span className="label-text" >Creator Id:</span>
                     </label>
-                    <input type='number' className="input input-bordered input-primary w-full" placeholder="Id of the creator."
+                    <input type='number' className="input input-bordered input-primary w-full hidden" placeholder="Id of the creator."
                     {...register("creator", {
                         required: {
                             valueAsNumber:true,
-                            
                             message: 'This field is required'
                         }
                     })}
+                    defaultValue={Number(data.creator.id)}
                     >
                     </input>
 
-                    <button type="submit" className="btn btn-primary text-white mt-5">Create Job</button>
+                    <button type="submit" className="btn btn-primary text-white mt-5">Update Job</button>
                 
             </form>
         </div>
@@ -136,4 +142,4 @@ const CreateJob = () =>
 }
 
 
-export default CreateJob;
+export default UpdateJob;
