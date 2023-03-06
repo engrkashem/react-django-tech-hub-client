@@ -11,7 +11,9 @@ const CourseSideCard = ({ course }) => {
                 <img className=' rounded-lg'
                     src={course.course.video_thumbnail_url} alt="" />
                 <button
-                    onClick={() => navigate(`/course/${course.course.id}`)} className='btn btn-primary btn-outline w-fit'>Continue</button>
+                    onClick={() => navigate(`/course/${course.course.id}`)} className='btn btn-primary btn-outline w-fit'>
+                        Continue
+                </button>
             </div>
         </div>
     );
