@@ -3,11 +3,14 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 // import { AuthContext } from '../../contexts/AuthProvider';
 import CourseSideCard from './CourseSideCard';
+import { useNavigate } from 'react-router-dom';
+
 
 const Courses = () => {
     const [courses, setCourses] = useState([]);
     const [isEnrollChanged, setIsEnrollChanged] = useState(false)
     const [enrolledCourses, setEnrolledCourses] = useState([])
+    const navigate = useNavigate()
     // const { dbUser } = useContext(AuthContext)
     // console.log(dbUser)
     useEffect(() => {
@@ -34,6 +37,12 @@ const Courses = () => {
     return (
         <div className=' flex gap-2 pb-10'>
             <div className=' hidden lg:block p-4 w-1/3 bg-base-100 border-r border-blue-100'>
+                <div className='flex-center justify-between items-center mb-5'>
+                    <button
+                        onClick={() => navigate(`/course/create-course`)} className='bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md'>
+                        Create New Course
+                    </button>
+                </div>
                 <h6 className=' text-2xl font-bold mb-10'>Your Courses</h6>
                 {
                     enrolledCourses.map(course => <CourseSideCard
