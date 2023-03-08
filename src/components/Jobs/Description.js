@@ -5,7 +5,7 @@ import { BriefcaseIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 
-const Description = ({id, update})=>{
+const Description = ({id, update, apply})=>{
 
     const [isJob, setJob] = useState('');
     const { user } = useContext(AuthContext);
@@ -18,7 +18,17 @@ const Description = ({id, update})=>{
         })
     }, [id])
 
-    console.log(user.email);
+    const [isApplication, setApplication] = useState(false)
+    useEffect(() => {
+        const url = `http://127.0.0.1:8000/application/${id}/`;
+        fetch(url).then(res => res.json()).then(data => {
+
+            setApplication(data)
+            // console.log(data)
+        })
+    }, [id])
+
+    console.log(isApplication);
 
     const handleDelete = (id) =>
     {
@@ -39,6 +49,10 @@ const Description = ({id, update})=>{
         update(data)
     }
 
+    const handleApply = data =>
+    {
+        apply(data)
+    }
 
     return (
         <div className="">
@@ -67,7 +81,7 @@ const Description = ({id, update})=>{
                         </button>
                     </div>
                      :
-                    <button className="btn btn-primary text-white">
+                    <button className="btn btn-primary text-white" onClick={()=>handleApply(isJob)}>
                     Apply Now
                     </button>
                 }
@@ -99,6 +113,26 @@ const Description = ({id, update})=>{
                     <h4 className="">{isJob.creator?.user_role}</h4>
                 </div>
             </div>
+            {
+                    user.email == isJob.creator?.email &&
+                    <div>
+                        <div className="divider"></div> 
+                        <h3 className="text-lg font-bold mt-5">Applications Received:</h3>
+                        {
+                            isApplication[0]?
+                            isApplication.map( application =>
+                                <div className="shadow border border-gray-200 rounded p-5 my-2 text-left">
+                                    <h2 className="font-bold text-xl">{application?.name}</h2>
+                                    <a href={application?.resume} className="text-blue-600 visited:text-purple-600"  target="_blank" >Resume Link</a>
+                                </div>
+                            
+                            ):
+                            <span>No Applications Found</span>
+                            
+                            
+                        }
+                    </div>
+            }
         </div>
     )
 }

@@ -8,7 +8,7 @@ const WriteBlog = () => {
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { dbUser } = useContext(AuthContext)
-    // console.log(dbUser)
+    console.log(dbUser)
     const onSubmit = blog => {
         // console.log(blog)
         blog.topic = blog.topic.toLowerCase()
