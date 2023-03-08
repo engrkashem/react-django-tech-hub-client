@@ -1,13 +1,14 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ApiService from '../../../Api';
-// import { AuthContext } from '../../../contexts/AuthProvider';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
-const CheckoutForm = ({ course_fee }) => {
+const CheckoutForm = ({ course }) => {
+    const { id, course_fee } = course
     const [cardError, setCardError] = useState('')
     const stripe = useStripe();
     const elements = useElements();
-    // const { dbuser } = useContext(AuthContext)
+    const { dbUser } = useContext(AuthContext)
     // console.log(dbuser)
     const email = 'kashemaust@gmail.com'
 
@@ -40,7 +41,25 @@ const CheckoutForm = ({ course_fee }) => {
             ApiService.saveStripeInfo({
                 course_fee, email, payment_method_id: paymentMethod.id
             }).then(response => {
-                console.log(response.data)
+                if (response.status === 200) {
+
+                    const enrollInfo = {
+                        student: (dbUser?.id || 3),
+                        course: id
+                    }
+                    fetch('http://127.0.0.1:8000/enroll/', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify(enrollInfo)
+                    }).then(res => res.json()).then(data => {
+                        // console.log(data)
+                    })
+
+                }
+                // console.log(response.data)
+                // console.log(response.status)
             }).catch(er => {
                 console.log(er)
             })

@@ -24,7 +24,7 @@ const Payment = () => {
                 <Elements stripe={stripePromise}>
                     <CheckoutForm
                         key={id}
-                        course_fee={course_fee}
+                        course={course}
                     ></CheckoutForm>
                 </Elements>
             </div>
