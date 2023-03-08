@@ -49,8 +49,7 @@ const Jobs = () => {
 
     }
 
-    const handleCreate = () =>
-    {
+    const handleCreate = () => {
         setId('');
         setUpdate('');
 
@@ -74,7 +73,7 @@ const Jobs = () => {
     return (
 
         <div className='grid lg:grid-cols-3 gap-4 lg:px-40 m-3 min-h-screen pt-11 scroll-smooth'>
-            <div className='lg:col-span-1 p-2 block overflow-auto max-h-screen scrollbar-none '> 
+            <div className='lg:col-span-1 p-2 block overflow-auto max-h-screen scrollbar-none '>
                 <form onSubmit={handleSubmit(handleSearch)} className=' flex items-center justify-center pt-6 mb-5'>
                     <input type="text" placeholder="Search with your job skill" className="input border rounded-full input-primary w-full max-w-md" name='search' {...register("search", {
                         required: {
@@ -87,7 +86,9 @@ const Jobs = () => {
                     </button>
                 </form>
 
+
                 <button className='w-2/5 btn btn-primary mb-5 text-white rounded-full mx-5' onClick={()=>handleCreate()}>
+
                     Create New Job
                 </button>
                 {/* <span className='text-normal ms-2'>
@@ -103,31 +104,32 @@ const Jobs = () => {
 
                 <div>
                     {
-                        !jobs.jobs?.length?
+                        !jobs.jobs?.length ?
                             <h3>No Jobs avalilable for this skill</h3>
-                        
-                        :jobs.jobs?.map(job =>
-                            <button className="border rounded-md mb-10 text-left p-5 shadow-md active:bg-gray-100 focus:border-blue-400 w-full" onClick={()=>handleClick(job.id)}>
-                                <JobCard
-                                    key={job.id}
-                                    job={job}
 
-                                >
-                                </JobCard>
-                            </button>
-                        )
+                            : jobs.jobs?.map(job =>
+                                <button className="border rounded-md mb-10 text-left p-5 shadow-md active:bg-gray-100 focus:border-blue-400 w-full" onClick={() => handleClick(job.id)}>
+                                    <JobCard
+                                        key={job.id}
+                                        job={job}
+
+                                    >
+                                    </JobCard>
+                                </button>
+                            )
                     }
                 </div>
-                    
+
             </div>
-            
+
 
             <div className='lg:col-span-2 flex w-full lg:mx-10 sm:hidden lg:block'>
                 <div className="p-10 border mt-10 border-grey-100 mx-10 rounded w-full lg:min-h-screen shadow lg:max-h-screen overflow-auto scrollbar-none">
                     {/* <div className="divider lg:divider-horizontal w-0 min-h-screen"></div> */}
                     {/* <div className='mt-15 p-2'> */}
-                    {   
+                    {
                         isUpdate ?
+
                         <UpdateJob
                         key = {isUpdate.id}
                         data = {isUpdate}
@@ -159,13 +161,14 @@ const Jobs = () => {
                             }
                             
                         </>
+
                     }
-                        
+
                     {/* </div> */}
                 </div>
             </div>
 
-            
+
         </div>
 
     );
