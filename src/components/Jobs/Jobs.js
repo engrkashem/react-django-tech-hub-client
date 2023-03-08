@@ -1,27 +1,32 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../contexts/AuthProvider';
+import ApplyJob from './ApplyJob';
 import CreateJob from './CreateJob';
 import Description from './Description';
 import JobCard from './JobCard';
 import UpdateJob from './UpdateJob';
 
 const Jobs = () => {
-    const [isErr, setErr] = useState('')
-    const [isId, setId] = useState('')
+    const { user } = useContext(AuthContext);
+    const [isErr, setErr] = useState('');
+    const [isApply, setApply] = useState(false);
+    const [isOnlyMy, setOnlyMy] = useState(false);
+    const [isId, setId] = useState('');
     const [isSearch, setSearch] = useState('');
     const [isUpdate, setUpdate] = useState('');
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const jobs_url = `http://127.0.0.1:8000/job/?search=`;
+    const jobs_url = `http://127.0.0.1:8000/job/?search=${isSearch}&email=${isOnlyMy?user.email:''}`;
+    // const request = {
+    //     method: 'GET',
+    //     headers: {'Content-Type' : 'application/json'},
+    //     body: JSON.stringify({'email':user.email})
+    // }
     const { data: jobs = [] } = useQuery({
-        queryKey: ['job', isSearch],
-        queryFn: () => fetch(jobs_url + isSearch).then(res => res.json()),
-        onError: (errors) => {
-            setErr(errors)
-        }
-
-
+        queryKey: ['job', isSearch, isOnlyMy],
+        queryFn: () => fetch(jobs_url).then(res => res.json())
     })
 
     const handleSearch = (data) => {
@@ -33,11 +38,14 @@ const Jobs = () => {
 
     }
 
+    // console.log(user)
+
     const handleClick = id => {
         // id.preventDefault();
         // console.log(id)
         setId(id);
         setUpdate('');
+        setApply(false)
 
     }
 
@@ -46,7 +54,21 @@ const Jobs = () => {
         setUpdate('');
 
     }
-    // console.log(isUpdate);
+
+    const handleOnlyMy = () =>
+    {
+        if(isOnlyMy){
+            setOnlyMy(false)
+        }
+        else{
+            setOnlyMy(true)
+        }
+    
+    }
+    
+
+    
+    // console.log(filterJob(jobs.jobs))
 
     return (
 
@@ -64,8 +86,20 @@ const Jobs = () => {
                     </button>
                 </form>
 
-                <button className='w-full btn btn-primary mb-5 text-white rounded-full' onClick={() => handleCreate()}>
+
+                <button className='w-2/5 btn btn-primary mb-5 text-white rounded-full mx-5' onClick={()=>handleCreate()}>
+
                     Create New Job
+                </button>
+                {/* <span className='text-normal ms-2'>
+                    Filter: 
+                </span> */}
+                <button className='w-2/5 btn btn-primary btn-outline mb-5 text-white rounded-full mx-5' onClick={()=>handleOnlyMy()}>
+                    
+                    {
+                        isOnlyMy?<>All Jobs</>:<>Posted by Me</>
+                    }
+
                 </button>
 
                 <div>
@@ -95,22 +129,39 @@ const Jobs = () => {
                     {/* <div className='mt-15 p-2'> */}
                     {
                         isUpdate ?
-                            <UpdateJob
-                                key={isUpdate.id}
-                                data={isUpdate}
-                            >
 
-                            </UpdateJob>
-                            :
-                            <>
-                                {isId ? <Description
-                                    key={isId}
-                                    id={isId}
-                                    update={setUpdate}
-                                ></Description>
-                                    : <CreateJob>
-                                    </CreateJob>}
-                            </>
+                        <UpdateJob
+                        key = {isUpdate.id}
+                        data = {isUpdate}
+                        >
+
+                        </UpdateJob>
+                        :
+                        <>
+                            {isApply?
+                                <ApplyJob
+                                    key = {isId}
+                                    apply = {isApply}
+                                >
+
+                                </ApplyJob>:
+                                <>
+                                    {isId ?<Description
+                                        key={isId}
+                                        id = {isId}
+                                        update = {setUpdate}
+                                        apply = {setApply}
+                                        ></Description>
+                                        : <CreateJob>
+                                        </CreateJob>}
+                                </>
+                                
+                                
+                            
+                            }
+                            
+                        </>
+
                     }
 
                     {/* </div> */}
