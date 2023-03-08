@@ -1,11 +1,16 @@
-import React from 'react';
+// import React from 'react';
 // import axios from 'axios';
 import { useNavigate } from 'react-router';
+// import { useNavigate } from 'react-router';
+import { AuthContext } from '../../contexts/AuthProvider';
+import React, { useContext } from 'react';
+
 
 const CourseCard = ({ course, setIsEnrollChanged, isEnrollChanged }) => {
     const navigate = useNavigate()
     // const [enrolled, setEnrolled] = useState(course.enroll_status)
     const { id, title, video_thumbnail_url, course_length, instructor, course_fee, description } = course;
+    const { dbUser } = useContext(AuthContext)
 
     const handleEnroll = () => {
         navigate(`/course/payment/${id}`)
@@ -28,8 +33,27 @@ const CourseCard = ({ course, setIsEnrollChanged, isEnrollChanged }) => {
                 // setEnrolled(true)
                 setIsEnrollChanged(!isEnrollChanged)
             })
+        // const updated_info = {
+        //     title,
+        //     description,
+        //     instructor: instructor.id,
+        //     enroll_status: true
+        // }
+        // fetch(`http://127.0.0.1:8000/course/${id}/`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(updated_info)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         // console.log(data)
+        //         // setEnrolled(true)
+        //         setIsEnrollChanged(!isEnrollChanged)
+        //     })
         const enrollInfo = {
-            student: 1,
+            student: (dbUser?.id || 1),
             course: id
         }
         fetch('http://127.0.0.1:8000/enroll/', {
