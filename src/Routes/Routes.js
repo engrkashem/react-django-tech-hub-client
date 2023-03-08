@@ -21,6 +21,7 @@ import BlogDetails from "../components/Dashboard/Dashboard/Blogs/BlogDetails";
 import UpdateBlog from "../components/Dashboard/Dashboard/Blogs/UpdateBlog";
 import CourseDetail from "../components/Courses/CourseDetail";
 import CreateCourse from "../components/Courses/CreateCourse";
+import Payment from "../components/Courses/Payment/Payment";
 
 
 const router = createBrowserRouter([
@@ -110,6 +111,13 @@ const router = createBrowserRouter([
                     return fetch(`http://127.0.0.1:8000/course/${params.courseId}/`)
                 },
                 element: <CourseDetail></CourseDetail>
+            },
+            {
+                path: '/course/payment/:courseId',
+                loader: async ({ params }) => {
+                    return fetch(`http://127.0.0.1:8000/course/${params.courseId}/`)
+                },
+                element: <Payment></Payment>
             },
         ]
     },
