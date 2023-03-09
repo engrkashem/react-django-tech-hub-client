@@ -121,8 +121,8 @@ const CreateJob = () => {
                 <input
                     type='number'
                     className="input input-bordered input-primary w-full hidden" placeholder="Id of the creator."
-                    defaultValue={dbUser.id}
-                    value={dbUser.id}
+                    defaultValue={dbUser?.id}
+                    value={dbUser?.id}
                     {...register("creator", {
                         required: {
                             valueAsNumber: true,

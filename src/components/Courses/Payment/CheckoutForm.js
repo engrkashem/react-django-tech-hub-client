@@ -10,7 +10,7 @@ const CheckoutForm = ({ course }) => {
     const elements = useElements();
     const { dbUser } = useContext(AuthContext)
     // console.log(dbuser)
-    const email = dbUser.email
+    const email = dbUser?.email
 
     const handleSubmit = async (event) => {
         event.preventDefault();

@@ -17,7 +17,7 @@ const Messaging = () => {
     const handleSendMessage = () => {
         const message = inputRef.current.value
         const message_obj = {
-            sender: dbUser.id,
+            sender: dbUser?.id,
             message_body: message
         }
         fetch('http://127.0.0.1:8000/message/', {
@@ -36,7 +36,7 @@ const Messaging = () => {
 
     return (
         <div className=' min-h-scree py-20'>
-            <h1 className=' text-5xl font-bold my-5 text-primary'>Message Us</h1>
+            <h1 className=' text-5xl font-bold my-5 text-primary'>Lets Talk</h1>
             <div className=' bg-sky-50 min-h-fit max-w-lg mx-auto rounded-3xl flex flex-col'>
                 <div className=' min-h-16 bg-transparent grow rounded-t-3xl pb-4'>
                     {

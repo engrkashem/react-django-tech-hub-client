@@ -10,6 +10,144 @@ import { useNavigate } from 'react-router-dom';
 
 const DetailDevelopers = () => {
     const navigate = useNavigate();
+    const devInfo = [
+        {
+            name: 'Mohammad Abul Kashem',
+            role: 'Team Leader',
+            skills: ['Python', 'React.Js', 'Node.Js', 'Django', 'JavaScript', 'C, C++', 'Data Structure', 'Algorithm', 'MySQL'],
+            img: ksmPic,
+            majorContribution: {
+                frontend: [
+                    'Navbar design & routing (conditional rendering)',
+                    'Footer.',
+                    'Whole Landing Page & navigation.',
+                    'Login, Registration with error handling',
+                    'Create, Update, Delete, and Show Blogs.',
+                    'Like, search blogs.',
+                    'Update user profile',
+                    'Stripe payment',
+                    'About Page, Developers Details, Project Details',
+                    'NotFound page',
+                    'Custom Active Link',
+                    'Message sending and show'
+                ],
+                backend: [
+                    'Model, Serializer, Views Blog app',
+                    'Model, PUT, POST of User',
+                    'Stripe complete Payment',
+                    'Model, Serializer, Views Messaging app'
+                ]
+            },
+            minorContribution: {
+                frontend: [
+                    'Course Enrollment, Details view, Side Section, Overall Design',
+                    'Jobs section design and responsiveness',
+                    'Contact page route creating'
+                ],
+                backend: [
+                    'User app Model, PUT, POST CRUD',
+                    'Course App assistance'
+                ]
+            }
+        },
+        {
+            name: 'Naimur Rahman',
+            role: 'Team Member',
+            skills: ['Python', 'React.Js', 'HTML', 'Django', 'CSS', 'C, C++', 'Data Structure', 'Algorithm'],
+            img: naimPic,
+            majorContribution: {
+                frontend: [
+                    'Course Dashboard',
+                    'Course Creation',
+                    'Enrol Course',
+                    'User personalise',
+                    'Course Details',
+                    'Play Course Videos',
+                    'Enrolled and Unenroll Separations',
+                    'Integration with  payment'
+                ],
+                backend: [
+                    'Model, Serializer, Views Course app',
+                    'Model, Serializer, Views Course Enrol',
+                    'CRUD operation'
+                ]
+            },
+            minorContribution: {
+                frontend: [
+                    'Navbar  & about us design',
+                    'Stripe payment'
+                ],
+                backend: []
+            }
+        },
+        {
+            name: 'Shihab Al Ratul',
+            role: 'Team Member',
+            skills: ['Python', 'React.Js', 'MySQL', 'Django', 'Node.JS', 'C, C++', 'Data Structure', 'Algorithm', 'JavaScript'],
+            img: ratulPic,
+            majorContribution: {
+                frontend: [
+                    'Job Portal UI with tailwind',
+                    'Job search by skill',
+                    'Posting Jobs with backend API',
+                    'Filter posted by me',
+                    'Job Application system',
+                    'Job Portal Functionality  using ReactJS',
+                    'Contact page implemented using EmailJS'
+                ],
+                backend: [
+                    'CRUD Operation for Job Portal And Application System Using Django Rest Framework',
+                    'Job and Application Model and serializer'
+                ]
+            },
+            minorContribution: {
+                frontend: [],
+                backend: ['Part of Users Model and Api']
+            }
+        },
+        {
+            name: 'Ariful Islam Arif',
+            role: 'Team Member',
+            skills: ['Python', 'React.Js', 'AWS', 'Django', 'Node.JS', 'C, C++', 'Data Structure', 'Algorithm', 'JavaScript'],
+            img: arifPic,
+            majorContribution: {
+                frontend: [],
+                backend: []
+            },
+            minorContribution: {
+                frontend: [],
+                backend: []
+            }
+        },
+        {
+            name: 'Mohammad Al Amin',
+            role: 'Team Member',
+            skills: ['Python', 'MySQL', 'HTML', 'Django', 'Node.JS', 'C, C++', 'Data Structure', 'Algorithm', 'Git'],
+            img: alaminPic,
+            majorContribution: {
+                frontend: [],
+                backend: []
+            },
+            minorContribution: {
+                frontend: [],
+                backend: []
+            }
+        },
+        {
+            name: 'Md Mezbah Uddin',
+            role: 'Team Member',
+            skills: ['Python', 'MySQL', 'HTML', 'Django', 'Node.JS', 'C, C++', 'Data Structure', 'Algorithm', 'Git'],
+            img: mezbahPic,
+            majorContribution: {
+                frontend: [],
+                backend: []
+            },
+            minorContribution: {
+                frontend: [],
+                backend: []
+            }
+        }
+    ]
     return (
         <div className=' min-h-screen flex flex-col justify-between p-12 bg-base-100'>
             <div >
