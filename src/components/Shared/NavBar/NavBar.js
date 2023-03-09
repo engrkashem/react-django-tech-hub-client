@@ -4,7 +4,7 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 
 
 const NavBar = () => {
-    const { user, LogOut, setDbUser } = useContext(AuthContext);
+    const { user, LogOut, setDbUser, dbUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -12,6 +12,7 @@ const NavBar = () => {
         LogOut()
             .then(() => {
                 setDbUser(null)
+                localStorage.removeItem('user')
                 navigate('/')
             })
             .catch(e => { })
@@ -28,7 +29,7 @@ const NavBar = () => {
                     <div className="dropdown dropdown-end dropdown-hover">
                         <div tabIndex={0} className="avatar">
                             <div className="w-10 rounded-full ring ring-primary">
-                                <img src={user.photoURL} alt='' />
+                                <img src={user?.photoURL || dbUser?.photo_url} alt='' />
                             </div>
                         </div>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">

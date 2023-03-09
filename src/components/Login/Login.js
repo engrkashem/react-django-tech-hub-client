@@ -40,6 +40,7 @@ const Login = () => {
                     body: JSON.stringify(userInfo)
                 }).then(res => res.json()).then(data => {
                     console.log(data)
+                    localStorage.setItem('user', JSON.stringify(data))
                     setDbUser(data)
                 })
                 navigate(from, { replace: true });
@@ -49,6 +50,8 @@ const Login = () => {
                 setLoginErr(errorMessage);
             })
         // console.log(email, password);
+
+
     }
 
     const handleGoogleLogin = () => {
@@ -70,7 +73,8 @@ const Login = () => {
                     },
                     body: JSON.stringify(userInfo)
                 }).then(res => res.json()).then(data => {
-                    // console.log(data)
+                    console.log(data)
+                    localStorage.setItem('user', JSON.stringify(data))
                     setDbUser(data)
                 })
                 navigate(from, { replace: true });
@@ -118,21 +122,16 @@ const Login = () => {
                             required: {
                                 value: true,
                                 message: 'Password is required'
-                            },
-                            pattern: {
-                                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                                message: 'Password should contain  one upper case, lower case, sepecial character, digit and min length 8.'
                             }
                         })}
                     />
                     <label className="label">
                         {errors.password?.type === 'required' && <span className="label-text-alt text-red-700">{errors.password.message}</span>}
-                        {errors.password?.type === 'pattern' && <span className="label-text-alt text-red-700">{errors.password.message}</span>}
                         {loginErr && <p className='text-red-500 mt-1'>{loginErr}</p>}
                     </label>
 
                     <input
-                        type="submit" className="input input-bordered w-full max-w-xs" />
+                        type="submit" className="btn btn-outline btn-primary w-full max-w-xs" />
 
                 </div>
             </form>

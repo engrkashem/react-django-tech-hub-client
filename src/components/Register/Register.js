@@ -42,6 +42,7 @@ const Register = () => {
                         body: JSON.stringify(userInfoDb)
                     }).then(res => res.json()).then(data => {
                         console.log(data)
+                        localStorage.setItem('user', JSON.stringify(data))
                         setDbUser(data)
                     })
 
@@ -77,6 +78,7 @@ const Register = () => {
                     body: JSON.stringify(userInfo)
                 }).then(res => res.json()).then(data => {
                     console.log(data)
+                    localStorage.setItem('user', JSON.stringify(data))
                     setDbUser(data)
                 })
                 navigate(from, { replace: true })
@@ -145,16 +147,11 @@ const Register = () => {
                             required: {
                                 value: true,
                                 message: 'Password is required'
-                            },
-                            pattern: {
-                                value: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                                message: 'Password should contain  one upper case, lower case, sepecial character, digit and min length 8.'
                             }
                         })}
                     />
                     <label className="label">
                         {errors.password?.type === 'required' && <span className="label-text-alt text-red-700">{errors.password.message}</span>}
-                        {errors.password?.type === 'pattern' && <span className="label-text-alt text-red-700">{errors.password.message}</span>}
                     </label>
 
                     {/* comfirm password */}
@@ -184,7 +181,7 @@ const Register = () => {
 
 
                     <input
-                        type="submit" className="input input-bordered w-full max-w-xs border-primary" onClick={handleGoogleLogin} />
+                        type="submit" className="btn btn-outline btn-primary w-full max-w-xs border-primary" />
                 </div>
             </form>
             <div className="divider w-1/2 mx-auto">OR</div>
