@@ -24,6 +24,8 @@ import CreateCourse from "../components/Courses/CreateCourse";
 import Payment from "../components/Courses/Payment/Payment";
 import NotFound from "../components/Shared/NotFound";
 import Contact from "../components/Contact/Contact";
+import MessagingLayout from "../Layout/MessagingLayout";
+import Messaging from "../components/Messaging/Messaging";
 
 
 const router = createBrowserRouter([
@@ -134,6 +136,16 @@ const router = createBrowserRouter([
             {
                 path: '/job',
                 element: <Jobs></Jobs>
+            }
+        ]
+    },
+    {
+        path: '/messaging',
+        element: <PrivateRoutes><MessagingLayout></MessagingLayout></PrivateRoutes>,
+        children: [
+            {
+                path: '/messaging',
+                element: <Messaging></Messaging>
             }
         ]
     },
