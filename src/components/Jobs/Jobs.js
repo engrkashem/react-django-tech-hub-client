@@ -11,14 +11,14 @@ import UpdateJob from './UpdateJob';
 
 const Jobs = () => {
     const { user } = useContext(AuthContext);
-    const [isErr, setErr] = useState('');
+    // const [isErr, setErr] = useState('');
     const [isApply, setApply] = useState(false);
     const [isOnlyMy, setOnlyMy] = useState(false);
     const [isId, setId] = useState('');
     const [isSearch, setSearch] = useState('');
     const [isUpdate, setUpdate] = useState('');
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const jobs_url = `http://127.0.0.1:8000/job/?search=${isSearch}&email=${isOnlyMy?user.email:''}`;
+    const { register, handleSubmit } = useForm();
+    const jobs_url = `http://127.0.0.1:8000/job/?search=${isSearch}&email=${isOnlyMy ? user.email : ''}`;
     // const request = {
     //     method: 'GET',
     //     headers: {'Content-Type' : 'application/json'},
@@ -55,24 +55,23 @@ const Jobs = () => {
 
     }
 
-    const handleOnlyMy = () =>
-    {
-        if(isOnlyMy){
+    const handleOnlyMy = () => {
+        if (isOnlyMy) {
             setOnlyMy(false)
         }
-        else{
+        else {
             setOnlyMy(true)
         }
-    
-    }
-    
 
-    
+    }
+
+
+
     // console.log(filterJob(jobs.jobs))
 
     return (
 
-        <div className='grid lg:grid-cols-3 gap-4 lg:px-40 m-3 min-h-screen pt-11 scroll-smooth'>
+        <div className='grid lg:grid-cols-3 gap-2 lg:px-20 min-h-screen pt-11 scroll-smooth w-full'>
             <div className='lg:col-span-1 p-2 block overflow-auto max-h-screen scrollbar-none '>
                 <form onSubmit={handleSubmit(handleSearch)} className=' flex items-center justify-center pt-6 mb-5'>
                     <input type="text" placeholder="Search with your job skill" className="input border rounded-full input-primary w-full max-w-md" name='search' {...register("search", {
@@ -87,20 +86,19 @@ const Jobs = () => {
                 </form>
 
 
-                <button className='w-2/5 btn btn-primary mb-5 text-white rounded-full mx-5' onClick={()=>handleCreate()}>
+                <div className='grid grid-cols-1 lg:grid-cols-2 w-full'>
+                    <button className=' btn btn-primary mb-5 text-white rounded-full mr-1' onClick={() => handleCreate()}>
 
-                    Create New Job
-                </button>
-                {/* <span className='text-normal ms-2'>
-                    Filter: 
-                </span> */}
-                <button className='w-2/5 btn btn-primary btn-outline mb-5 text-white rounded-full mx-5' onClick={()=>handleOnlyMy()}>
-                    
-                    {
-                        isOnlyMy?<>All Jobs</>:<>Posted by Me</>
-                    }
+                        Create New Job
+                    </button>
+                    <button className='btn btn-primary btn-outline mb-5 text-white rounded-full' onClick={() => handleOnlyMy()}>
 
-                </button>
+                        {
+                            isOnlyMy ? <>All Jobs</> : <>Posted by Me</>
+                        }
+
+                    </button>
+                </div>
 
                 <div>
                     {
@@ -130,37 +128,37 @@ const Jobs = () => {
                     {
                         isUpdate ?
 
-                        <UpdateJob
-                        key = {isUpdate.id}
-                        data = {isUpdate}
-                        >
+                            <UpdateJob
+                                key={isUpdate.id}
+                                data={isUpdate}
+                            >
 
-                        </UpdateJob>
-                        :
-                        <>
-                            {isApply?
-                                <ApplyJob
-                                    key = {isId}
-                                    apply = {isApply}
-                                >
-
-                                </ApplyJob>:
-                                <>
-                                    {isId ?<Description
+                            </UpdateJob>
+                            :
+                            <>
+                                {isApply ?
+                                    <ApplyJob
                                         key={isId}
-                                        id = {isId}
-                                        update = {setUpdate}
-                                        apply = {setApply}
+                                        apply={isApply}
+                                    >
+
+                                    </ApplyJob> :
+                                    <>
+                                        {isId ? <Description
+                                            key={isId}
+                                            id={isId}
+                                            update={setUpdate}
+                                            apply={setApply}
                                         ></Description>
-                                        : <CreateJob>
-                                        </CreateJob>}
-                                </>
-                                
-                                
-                            
-                            }
-                            
-                        </>
+                                            : <CreateJob>
+                                            </CreateJob>}
+                                    </>
+
+
+
+                                }
+
+                            </>
 
                     }
 

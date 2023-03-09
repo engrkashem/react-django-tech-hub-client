@@ -22,6 +22,7 @@ const BlogBottomNavigation = ({ blog }) => {
             body: ''
         }).then(res => res.json()).then(data => {
             toast('Your Blog is deleted successfully')
+            window.location.reload(true)
             navigate('/dashboard')
         })
     }
