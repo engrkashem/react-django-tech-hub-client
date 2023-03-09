@@ -13,7 +13,7 @@ const DetailDevelopers = () => {
     return (
         <div className=' min-h-screen flex flex-col justify-between p-12 bg-base-100'>
             <div >
-                <h3 className='text-6xl font-bold text-primary'>Developers Team</h3>
+                <h3 className='text-6xl font-bold text-primary mt-20'>Developers Team</h3>
                 <h4 className='text-3xl font-bold mt-5'>The Django Knight</h4>
                 <div className='grid grid-cols-1 lg:grid-cols-3 justify-between my-10 shadow-sm shadow-primary w-3/4 mx-auto'>
                     <div className='col-span-2 text-start lg:p-8'>

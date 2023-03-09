@@ -55,8 +55,8 @@ const NavBar = () => {
                 <React.Fragment>
                     <li><Link to={'/discover'}>Discover</Link></li>
                     <li><Link to={'/people'}>People</Link></li>
-                    <li><Link to={'/courses'}>Courses</Link></li>
-                    <li><Link to={'/jobs'} className='flex flex-col'> Jobs </Link></li>
+                    <li><Link to={'/contact'}>Contact</Link></li>
+                    <li><Link to={'/about'} className='flex flex-col'> About </Link></li>
                     <li className='border-2 border-solid border-primary rounded-full'><Link to={'/login'} className=' px-7'>Login</Link></li>
                 </React.Fragment>
 

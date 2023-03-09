@@ -22,6 +22,8 @@ import UpdateBlog from "../components/Dashboard/Dashboard/Blogs/UpdateBlog";
 import CourseDetail from "../components/Courses/CourseDetail";
 import CreateCourse from "../components/Courses/CreateCourse";
 import Payment from "../components/Courses/Payment/Payment";
+import NotFound from "../components/Shared/NotFound";
+import Contact from "../components/Contact/Contact";
 
 
 const router = createBrowserRouter([
@@ -52,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: 'people',
                 element: <People />
+            },
+            {
+                path: 'contact',
+                element: <Contact />
             },
             {
                 path: 'project-details',
@@ -130,6 +136,10 @@ const router = createBrowserRouter([
                 element: <Jobs></Jobs>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <NotFound></NotFound>
     }
 ]);
 
