@@ -122,8 +122,8 @@ const WriteBlog = () => {
                     <input
                         type="number"
                         placeholder="example: 1, 9"
-                        defaultValue={dbUser?.id || 3}
-                        value={dbUser?.id || 3}
+                        defaultValue={dbUser?.id}
+                        value={dbUser?.id}
                         className="input input-bordered input-primary w-full max-w-md text-sm"
                         {...register("blog_creator")}
                     />
