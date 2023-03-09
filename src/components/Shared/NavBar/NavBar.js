@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import CustomActiveLink from '../CustomActiveLink/CustomActiveLink';
 
 
 const NavBar = () => {
@@ -21,11 +22,22 @@ const NavBar = () => {
         {
             user ?
                 <React.Fragment>
-                    <li><Link to={'/dashboard'}>Blogs</Link></li>
+                    {/* <li><Link to={'/dashboard'}>Blogs</Link></li>
                     <li><Link to={'/course'}>Courses</Link></li>
                     <li><Link to={'/job'} > Jobs </Link></li>
-                    <li><Link to={'/job'} > Messaging </Link></li>
-                    <li><Link to={'/job'} > Notifications </Link></li>
+                    <li><Link to={'/job'} > Messaging </Link></li> */}
+                    <li>
+                        <CustomActiveLink to={'/dashboard'}>Blogs</CustomActiveLink>
+                    </li>
+                    <li>
+                        <CustomActiveLink to={'/course'}>Courses</CustomActiveLink>
+                    </li>
+                    <li>
+                        <CustomActiveLink to={'/job'}>Jobs</CustomActiveLink>
+                    </li>
+                    <li>
+                        <CustomActiveLink to={'/'}>Messaging</CustomActiveLink>
+                    </li>
                     <div className="dropdown dropdown-end dropdown-hover">
                         <div tabIndex={0} className="avatar">
                             <div className="w-10 rounded-full ring ring-primary">
@@ -58,7 +70,7 @@ const NavBar = () => {
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow  rounded-box w-52 bg-base-100">
+                    <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow  rounded-box w-52 bg-base-100 font-bold">
                         {menuItems}
                     </ul>
                 </div>
@@ -90,7 +102,7 @@ const NavBar = () => {
             </div>
             <div className="navbar-end ">
                 <div className='hidden lg:flex'>
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 font-bold">
                         {menuItems}
                     </ul>
                 </div>

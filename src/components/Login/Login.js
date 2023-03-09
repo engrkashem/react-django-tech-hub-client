@@ -73,7 +73,7 @@ const Login = () => {
                     },
                     body: JSON.stringify(userInfo)
                 }).then(res => res.json()).then(data => {
-                    console.log(data)
+                    // console.log(data)
                     localStorage.setItem('user', JSON.stringify(data))
                     setDbUser(data)
                 })
