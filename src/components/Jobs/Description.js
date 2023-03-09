@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useQuery } from "react-query";
+// import { useQuery } from "react-query";
 
 import { BriefcaseIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 
-const Description = ({id, update, apply})=>{
+const Description = ({ id, update, apply }) => {
 
     const [isJob, setJob] = useState('');
     const { user } = useContext(AuthContext);
@@ -28,29 +28,26 @@ const Description = ({id, update, apply})=>{
         })
     }, [id])
 
-    console.log(isApplication);
+    // console.log(isApplication);
 
-    const handleDelete = (id) =>
-    {
+    const handleDelete = (id) => {
         const url = `http://127.0.0.1:8000/job/${id}/`;
         const request = {
             method: 'DELETE',
         }
         fetch(url, request).then(res => res.json())
-        .then(data => {
+            .then(data => {
                 // console.log(data)
                 window.location.reload(true)
-        })
+            })
 
     }
 
-    const handleUpdate = data =>
-    {
+    const handleUpdate = data => {
         update(data)
     }
 
-    const handleApply = data =>
-    {
+    const handleApply = data => {
         apply(data)
     }
 
@@ -71,21 +68,21 @@ const Description = ({id, update, apply})=>{
 
                 </div>
                 {
-                    user.email == isJob.creator?.email ? 
-                    <div className="">
-                        <button className="btn btn-primary text-white" onClick={()=>handleUpdate(isJob)}>
-                        Update
+                    user.email === isJob.creator?.email ?
+                        <div className="">
+                            <button className="btn btn-primary text-white" onClick={() => handleUpdate(isJob)}>
+                                Update
+                            </button>
+                            <button className="btn bg-red-600 border-0 text-white mx-4" onClick={() => handleDelete(isJob.id)}>
+                                Delete
+                            </button>
+                        </div>
+                        :
+                        <button className="btn btn-primary text-white" onClick={() => handleApply(isJob)}>
+                            Apply Now
                         </button>
-                        <button className="btn bg-red-600 border-0 text-white mx-4" onClick={()=>handleDelete(isJob.id)}>
-                        Delete
-                        </button>
-                    </div>
-                     :
-                    <button className="btn btn-primary text-white" onClick={()=>handleApply(isJob)}>
-                    Apply Now
-                    </button>
                 }
-                
+
             </div>
             <div className="divider"></div>
             <div className="">
@@ -94,11 +91,11 @@ const Description = ({id, update, apply})=>{
             </div>
             <div className="text-left mt-16 ">
                 <h3 className="text-lg font-bold">Job Details:</h3>
-                
+
                 <p className="whitespace-pre-wrap">
-                {isJob.content}
+                    {isJob.content}
                 </p>
-                
+
 
                 <h3 className="text-lg font-bold mt-5">Requirements:</h3>
                 <text className="">{isJob.skill_requirements}</text>
@@ -114,24 +111,24 @@ const Description = ({id, update, apply})=>{
                 </div>
             </div>
             {
-                    user.email == isJob.creator?.email &&
-                    <div>
-                        <div className="divider"></div> 
-                        <h3 className="text-lg font-bold mt-5">Applications Received:</h3>
-                        {
-                            isApplication[0]?
-                            isApplication.map( application =>
+                user.email === isJob.creator?.email &&
+                <div>
+                    <div className="divider"></div>
+                    <h3 className="text-lg font-bold mt-5">Applications Received:</h3>
+                    {
+                        isApplication[0] ?
+                            isApplication.map(application =>
                                 <div className="shadow border border-gray-200 rounded p-5 my-2 text-left">
                                     <h2 className="font-bold text-xl">{application?.name}</h2>
-                                    <a href={application?.resume} className="text-blue-600 visited:text-purple-600"  target="_blank" >Resume Link</a>
+                                    <a href={application?.resume} className="text-blue-600 visited:text-purple-600" target="_blank" >Resume Link</a>
                                 </div>
-                            
-                            ):
+
+                            ) :
                             <span>No Applications Found</span>
-                            
-                            
-                        }
-                    </div>
+
+
+                    }
+                </div>
             }
         </div>
     )

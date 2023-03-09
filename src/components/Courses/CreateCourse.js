@@ -13,7 +13,7 @@ const CreateCourse = () => {
     const { dbUser } = useContext(AuthContext);
     const navigate = useNavigate()
     // const history = useHistory();
-    console.log(dbUser)
+    // console.log(dbUser)
 
     const handleSubmit = (nData) => {
         nData.preventDefault();
@@ -25,7 +25,7 @@ const CreateCourse = () => {
             video_thumbnail_url: videoThumbnailUrl,
             video_playlist_url: videoPlaylistUrl,
             enroll_status: false,
-            instructor: dbUser?.id || 1,
+            instructor: dbUser?.id,
         };
         fetch("http://127.0.0.1:8000/course/", {
             method: "POST",

@@ -36,7 +36,7 @@ const NavBar = () => {
                         <CustomActiveLink to={'/job'}>Jobs</CustomActiveLink>
                     </li>
                     <li>
-                        <CustomActiveLink to={'/'}>Messaging</CustomActiveLink>
+                        <CustomActiveLink to={'/messaging'}>Messaging</CustomActiveLink>
                     </li>
                     <div className="dropdown dropdown-end dropdown-hover">
                         <div tabIndex={0} className="avatar">
