@@ -1,0 +1,5 @@
+.not_found_container {
+    background-image: url('../../assets/notFound.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}

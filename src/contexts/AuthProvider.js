@@ -45,6 +45,16 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem('user')
+        setDbUser(JSON.parse(loggedInUser))
+        setInterval(() => {
+            const loggedInUser = localStorage.getItem('user')
+            setDbUser(JSON.parse(loggedInUser))
+        }, 10000)
+
+    }, [])
+
 
     const authInfo = {
         createUser,

@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import CustomActiveLink from '../CustomActiveLink/CustomActiveLink';
 
 
 const NavBar = () => {
-    const { user, LogOut, setDbUser } = useContext(AuthContext);
+    const { user, LogOut, setDbUser, dbUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -12,6 +13,7 @@ const NavBar = () => {
         LogOut()
             .then(() => {
                 setDbUser(null)
+                localStorage.removeItem('user')
                 navigate('/')
             })
             .catch(e => { })
@@ -20,15 +22,26 @@ const NavBar = () => {
         {
             user ?
                 <React.Fragment>
-                    <li><Link to={'/dashboard'}>Blogs</Link></li>
+                    {/* <li><Link to={'/dashboard'}>Blogs</Link></li>
                     <li><Link to={'/course'}>Courses</Link></li>
                     <li><Link to={'/job'} > Jobs </Link></li>
-                    <li><Link to={'/job'} > Messaging </Link></li>
-                    <li><Link to={'/job'} > Notifications </Link></li>
+                    <li><Link to={'/job'} > Messaging </Link></li> */}
+                    <li>
+                        <CustomActiveLink to={'/dashboard'}>Blogs</CustomActiveLink>
+                    </li>
+                    <li>
+                        <CustomActiveLink to={'/course'}>Courses</CustomActiveLink>
+                    </li>
+                    <li>
+                        <CustomActiveLink to={'/job'}>Jobs</CustomActiveLink>
+                    </li>
+                    <li>
+                        <CustomActiveLink to={'/messaging'}>Messaging</CustomActiveLink>
+                    </li>
                     <div className="dropdown dropdown-end dropdown-hover">
                         <div tabIndex={0} className="avatar">
                             <div className="w-10 rounded-full ring ring-primary">
-                                <img src={user.photoURL} alt='' />
+                                <img src={user?.photoURL || dbUser?.photo_url} alt='' />
                             </div>
                         </div>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
@@ -42,8 +55,8 @@ const NavBar = () => {
                 <React.Fragment>
                     <li><Link to={'/discover'}>Discover</Link></li>
                     <li><Link to={'/people'}>People</Link></li>
-                    <li><Link to={'/courses'}>Courses</Link></li>
-                    <li><Link to={'/jobs'} className='flex flex-col'> Jobs </Link></li>
+                    <li><Link to={'/contact'}>Contact</Link></li>
+                    <li><Link to={'/about'} className='flex flex-col'> About </Link></li>
                     <li className='border-2 border-solid border-primary rounded-full'><Link to={'/login'} className=' px-7'>Login</Link></li>
                 </React.Fragment>
 
@@ -57,7 +70,7 @@ const NavBar = () => {
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow  rounded-box w-52 bg-base-100">
+                    <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow  rounded-box w-52 bg-base-100 font-bold">
                         {menuItems}
                     </ul>
                 </div>
@@ -89,7 +102,7 @@ const NavBar = () => {
             </div>
             <div className="navbar-end ">
                 <div className='hidden lg:flex'>
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 font-bold">
                         {menuItems}
                     </ul>
                 </div>

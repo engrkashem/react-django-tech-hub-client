@@ -8,7 +8,7 @@ const WriteBlog = () => {
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { dbUser } = useContext(AuthContext)
-    // console.log(dbUser)
+    console.log(dbUser)
     const onSubmit = blog => {
         // console.log(blog)
         blog.topic = blog.topic.toLowerCase()
@@ -122,8 +122,8 @@ const WriteBlog = () => {
                     <input
                         type="number"
                         placeholder="example: 1, 9"
-                        defaultValue={dbUser?.id || 4}
-                        value={dbUser?.id || 4}
+                        defaultValue={dbUser?.id}
+                        value={dbUser?.id}
                         className="input input-bordered input-primary w-full max-w-md text-sm"
                         {...register("blog_creator")}
                     />

@@ -1,5 +1,4 @@
 import CourseCard from './CourseCard';
-import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
 import CourseSideCard from './CourseSideCard';
@@ -12,28 +11,30 @@ const Courses = () => {
     const [enrolledCourses, setEnrolledCourses] = useState([])
     const navigate = useNavigate()
     const { dbUser } = useContext(AuthContext)
-    // const  {id}= dbUser
-    console.log(dbUser)
+    // console.log(dbUser)
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/enroll/${dbUser?.id || 1}/`)
+        fetch(`http://127.0.0.1:8000/enroll/${dbUser?.id}/`)
             .then(res => res.json())
             .then(data => {
                 setEnrolledCourses(data?.enroll)
             })
     }, [isEnrollChanged, dbUser])
-    
+
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/course/')
-            .then(response => {
-                const unEnrolledCourses = response?.data?.filter(c => {
-                    const isEnrolled = enrolledCourses.some(enrolled => enrolled.course.id === c.id);
-                    return !isEnrolled;
-                });
+        fetch('http://127.0.0.1:8000/course/')
+            .then(res => res.json())
+            .then(data => {
+                // const unEnrolledCourses = data?.data?.filter(c => {
+                //     const allUnEnrolledCourses = enrolledCourses.some(enrolled => enrolled.course.id === c.id);
+                //     return allUnEnrolledCourses;
+                // });
+                let unEnrolledCourses = data.filter(c1 => !enrolledCourses.some(c2 => c2.course.id === c1.id))
                 setCourses(unEnrolledCourses);
             })
-            .catch(error => console.log(error));
+
     }, [isEnrollChanged, enrolledCourses]);
+
 
     return (
         <div className=' flex gap-2 pb-10'>
@@ -46,7 +47,7 @@ const Courses = () => {
                 </div>
                 <h6 className=' text-2xl  font-bold mb-10'>Your Courses</h6>
                 {
-                    enrolledCourses.map(course => <CourseSideCard
+                    enrolledCourses?.map(course => <CourseSideCard
                         key={course.id}
                         course={course}
                     ></CourseSideCard>)

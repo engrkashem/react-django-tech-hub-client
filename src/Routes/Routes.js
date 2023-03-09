@@ -21,6 +21,11 @@ import BlogDetails from "../components/Dashboard/Dashboard/Blogs/BlogDetails";
 import UpdateBlog from "../components/Dashboard/Dashboard/Blogs/UpdateBlog";
 import CourseDetail from "../components/Courses/CourseDetail";
 import CreateCourse from "../components/Courses/CreateCourse";
+import Payment from "../components/Courses/Payment/Payment";
+import NotFound from "../components/Shared/NotFound";
+import Contact from "../components/Contact/Contact";
+import MessagingLayout from "../Layout/MessagingLayout";
+import Messaging from "../components/Messaging/Messaging";
 
 
 const router = createBrowserRouter([
@@ -51,6 +56,10 @@ const router = createBrowserRouter([
             {
                 path: 'people',
                 element: <People />
+            },
+            {
+                path: 'contact',
+                element: <Contact />
             },
             {
                 path: 'project-details',
@@ -111,6 +120,13 @@ const router = createBrowserRouter([
                 },
                 element: <CourseDetail></CourseDetail>
             },
+            {
+                path: '/course/payment/:courseId',
+                loader: async ({ params }) => {
+                    return fetch(`http://127.0.0.1:8000/course/${params.courseId}/`)
+                },
+                element: <Payment></Payment>
+            },
         ]
     },
     {
@@ -122,6 +138,20 @@ const router = createBrowserRouter([
                 element: <Jobs></Jobs>
             }
         ]
+    },
+    {
+        path: '/messaging',
+        element: <PrivateRoutes><MessagingLayout></MessagingLayout></PrivateRoutes>,
+        children: [
+            {
+                path: '/messaging',
+                element: <Messaging></Messaging>
+            }
+        ]
+    },
+    {
+        path: '*',
+        element: <NotFound></NotFound>
     }
 ]);
 
