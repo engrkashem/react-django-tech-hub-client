@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { AuthContext } from '../../contexts/AuthProvider'
 
 const CreateJob = () => {
@@ -17,7 +18,8 @@ const CreateJob = () => {
         }
         fetch(url, request).then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
+                toast.success('A new Job is created')
                 window.location.reload(true)
             })
     }

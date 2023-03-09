@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-hot-toast";
 // import { useHistory } from "react-router-dom";
 
 const CreateCourse = () => {
@@ -35,6 +36,7 @@ const CreateCourse = () => {
             body: JSON.stringify(newCourse),
         })
             .then(() => {
+                toast.success('Course is created.')
                 navigate('/course')
             })
             .catch((error) => console.log(error));
