@@ -9,8 +9,8 @@ const NavBar = () => {
     const navigate = useNavigate();
 
 
-    console.log(dbUser)
-    console.log(dbUser.userName)
+    // console.log(dbUser)
+    // console.log(dbUser.userName)
 
     const handleSignout = () => {
         LogOut()
