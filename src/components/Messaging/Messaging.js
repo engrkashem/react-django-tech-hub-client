@@ -40,7 +40,7 @@ const Messaging = () => {
             <div className=' shadow shadow-sky-200  min-h-fit max-w-lg mx-auto rounded-3xl flex flex-col'>
                 <div className=' min-h-16 bg-transparent grow rounded-t-3xl pb-4'>
                     {
-                        messages.map(message => <Sms
+                        messages?.map(message => <Sms
                             key={message.id}
                             message={message}
                         ></Sms>)

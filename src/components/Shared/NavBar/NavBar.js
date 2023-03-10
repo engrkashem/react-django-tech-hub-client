@@ -9,6 +9,9 @@ const NavBar = () => {
     const navigate = useNavigate();
 
 
+    console.log(dbUser)
+    console.log(dbUser.userName)
+
     const handleSignout = () => {
         LogOut()
             .then(() => {
@@ -45,7 +48,7 @@ const NavBar = () => {
                             </div>
                         </div>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><small className='font-semibold'>{user.displayName}</small></li>
+                            <li><small className='font-semibold'>{user?.displayName || dbUser?.userName}</small></li>
                             <li><Link to={'/dashboard/update-profile'} className='w-full'>Update Profile</Link></li>
                             <li><button onClick={handleSignout} className='w-full'>Sign Out</button></li>
                         </ul>
