@@ -4,7 +4,7 @@ import pic from '../../assets/profile/ksmProfilePic.png'
 
 const JoinBanner = () => {
     return (
-        <div className=' py-20 px-5 lg:px-20 '>
+        <div className='pt-5 pb-20 px-5 lg:px-20 mt-24'>
             <div className="stats shadow h-60 w-full">
 
                 <div className="stat shadow-md">

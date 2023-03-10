@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+
 import pic1 from '../../assets/pic1.jpg';
 import pic2 from '../../assets/pic2.jpg';
 
 const Banner = () => {
-    const navigate = useNavigate();
+
     return (
-        <div className='min-h-screen bg-base-100' >
-            <p onClick={() => navigate('/register')} className=' border-2 border-primary mx-auto max-w-lg py-5 rounded-full hover:bg-blue-50 font-bold'>New to TechHUB? <Link to={'/register'} className='text-primary'>Join Now</Link></p>
+        <div className='min-h-fit bg-base-100 mt-20' >
+
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 items-center'>
                 <div>
                     <div className="avatar w-full">
