@@ -17,7 +17,7 @@ const Messaging = () => {
     const handleSendMessage = () => {
         const message = inputRef.current.value
         const message_obj = {
-            sender: dbUser.id,
+            sender: dbUser?.id,
             message_body: message
         }
         fetch('http://127.0.0.1:8000/message/', {
@@ -36,8 +36,8 @@ const Messaging = () => {
 
     return (
         <div className=' min-h-scree py-20'>
-            <h1 className=' text-5xl font-bold my-5 text-primary'>Message Us</h1>
-            <div className=' bg-sky-50 min-h-fit max-w-lg mx-auto rounded-3xl flex flex-col'>
+            <h1 className=' text-5xl font-bold my-5 '>Lets Talk</h1>
+            <div className=' shadow shadow-sky-200  min-h-fit max-w-lg mx-auto rounded-3xl flex flex-col'>
                 <div className=' min-h-16 bg-transparent grow rounded-t-3xl pb-4'>
                     {
                         messages.map(message => <Sms
@@ -57,7 +57,7 @@ const Messaging = () => {
                         onClick={handleSendMessage}
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24" fill="currentColor"
-                        className="w-12 h-12 text-primary">
+                        className="w-10 h-10 text-primary">
                         <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
                     </svg>
 

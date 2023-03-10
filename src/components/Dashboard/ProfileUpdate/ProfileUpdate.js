@@ -24,7 +24,7 @@ const ProfileUpdate = () => {
             photo_url: photo,
             profession: profession,
             skill_set: skills,
-            userName: dbUser.userName
+            userName: dbUser?.userName
         }
 
         fetch('http://127.0.0.1:8000/user/', {

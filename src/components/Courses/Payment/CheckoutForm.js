@@ -1,5 +1,7 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import ApiService from '../../../Api';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
@@ -8,9 +10,10 @@ const CheckoutForm = ({ course }) => {
     const [cardError, setCardError] = useState('')
     const stripe = useStripe();
     const elements = useElements();
+    const navigate = useNavigate()
     const { dbUser } = useContext(AuthContext)
     // console.log(dbuser)
-    const email = dbUser.email
+    const email = dbUser?.email
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -44,7 +47,7 @@ const CheckoutForm = ({ course }) => {
                 if (response.status === 200) {
 
                     const enrollInfo = {
-                        student: (dbUser?.id || 3),
+                        student: (dbUser?.id),
                         course: id
                     }
                     fetch('http://127.0.0.1:8000/enroll/', {
@@ -55,9 +58,11 @@ const CheckoutForm = ({ course }) => {
                         body: JSON.stringify(enrollInfo)
                     }).then(res => res.json()).then(data => {
                         // console.log(data)
+                        toast.success('Your Payment is completed and Enrolment is successfull')
                     })
 
                 }
+                navigate('/course');
                 // console.log(response.data)
                 // console.log(response.status)
             }).catch(er => {

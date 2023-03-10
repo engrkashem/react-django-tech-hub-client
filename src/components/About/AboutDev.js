@@ -3,7 +3,7 @@ import devPic from '../../assets/about/developerPic.jpg';
 
 const AboutDev = ({ navigate }) => {
     return (
-        <div className="card min-h-screen bg-blue-50 shadow-md shadow-primary">
+        <div className="card min-h-screen  shadow-sm shadow-primary">
             <div className="card-body flex flex-col justify-between">
                 <div >
                     <h2 className=" text-4xl font-bold">About Developers</h2>
