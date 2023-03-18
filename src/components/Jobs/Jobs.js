@@ -18,7 +18,8 @@ const Jobs = () => {
     const [isSearch, setSearch] = useState('');
     const [isUpdate, setUpdate] = useState('');
     const { register, handleSubmit } = useForm();
-    const jobs_url = `http://127.0.0.1:8000/job/?search=${isSearch}&email=${isOnlyMy ? user.email : ''}`;
+    // const jobs_url = `http://127.0.0.1:8000/job/?search=${isSearch}&email=${isOnlyMy ? user.email : ''}`;
+    let jobs_url = `https://naimur.pythonanywhere.com/job/?search=${isSearch}&email=${isOnlyMy ? user.email : ''}`;
     // const request = {
     //     method: 'GET',
     //     headers: {'Content-Type' : 'application/json'},

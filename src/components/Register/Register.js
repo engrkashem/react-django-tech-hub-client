@@ -34,7 +34,9 @@ const Register = () => {
                         userName: name,
                         email: email
                     }
-                    fetch(`http://127.0.0.1:8000/user/`, {
+                    // const url = `http://127.0.0.1:8000/user/`
+                    const url = `https://naimur.pythonanywhere.com/user/`
+                    fetch(url, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -70,7 +72,9 @@ const Register = () => {
                     email: email,
                     photo_url: photoURL
                 }
-                fetch(`http://127.0.0.1:8000/user/`, {
+                // const url = `http://127.0.0.1:8000/user/`
+                const url = `https://naimur.pythonanywhere.com/user/`
+                fetch(url, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

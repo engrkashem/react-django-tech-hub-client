@@ -7,9 +7,11 @@ const Messaging = () => {
     const inputRef = useRef(null)
     const { dbUser } = useContext(AuthContext);
 
+    // const urlGet = `http://127.0.0.1:8000/message/`
+    const urlGet = `https://naimur.pythonanywhere.com/message/`
     const { data: messages = [], refetch } = useQuery({
         queryKey: ['message'],
-        queryFn: () => fetch('http://127.0.0.1:8000/message/')
+        queryFn: () => fetch(urlGet)
             .then(res => res.json())
     })
     // console.log(messages)
@@ -20,7 +22,9 @@ const Messaging = () => {
             sender: dbUser?.id,
             message_body: message
         }
-        fetch('http://127.0.0.1:8000/message/', {
+        // const url = `http://127.0.0.1:8000/message/`
+        const urlPost = `https://naimur.pythonanywhere.com/message/`
+        fetch(urlPost, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

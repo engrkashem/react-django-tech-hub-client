@@ -90,13 +90,13 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/blog-detail/:blogId',
                 loader: async ({ params }) => {
-                    return fetch(`http://127.0.0.1:8000/blog/${params.blogId}`)
+                    return fetch(`https://naimur.pythonanywhere.com/blog/${params.blogId}`)
                 },
                 element: <BlogDetails></BlogDetails>
             },
             {
                 path: '/dashboard/update-blog/:blogId',
-                loader: async ({ params }) => fetch(`http://127.0.0.1:8000/blog/${params.blogId}`),
+                loader: async ({ params }) => fetch(`https://naimur.pythonanywhere.com/blog/${params.blogId}`),
                 element: <UpdateBlog></UpdateBlog>
             }
         ]
@@ -116,14 +116,14 @@ const router = createBrowserRouter([
             {
                 path: '/course/:courseId',
                 loader: async ({ params }) => {
-                    return fetch(`http://127.0.0.1:8000/course/${params.courseId}/`)
+                    return fetch(`https://naimur.pythonanywhere.com/course/${params.courseId}/`)
                 },
                 element: <CourseDetail></CourseDetail>
             },
             {
                 path: '/course/payment/:courseId',
                 loader: async ({ params }) => {
-                    return fetch(`http://127.0.0.1:8000/course/${params.courseId}/`)
+                    return fetch(`https://naimur.pythonanywhere.com/course/${params.courseId}/`)
                 },
                 element: <Payment></Payment>
             },

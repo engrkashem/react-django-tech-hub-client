@@ -32,7 +32,9 @@ const Login = () => {
                     email: email,
                     photo_url: photoURL || 'https://i.ibb.co/3RQ5Mh2/py.png'
                 }
-                fetch(`http://127.0.0.1:8000/user/`, {
+                // const url = `http://127.0.0.1:8000/user/`
+                const url = `https://naimur.pythonanywhere.com/user/`
+                fetch(url, {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'
@@ -66,7 +68,9 @@ const Login = () => {
                     email: email,
                     photo_url: photoURL
                 }
-                fetch(`http://127.0.0.1:8000/user/`, {
+                // const url = `http://127.0.0.1:8000/user/`
+                const url = `https://naimur.pythonanywhere.com/user/`
+                fetch(url, {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'

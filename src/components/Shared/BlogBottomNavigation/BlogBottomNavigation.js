@@ -14,7 +14,9 @@ const BlogBottomNavigation = ({ blog }) => {
 
     if (isDelete) {
         // console.log(isDelete)
-        fetch(`http://127.0.0.1:8000/blog/${id}`, {
+        // let url=`http://127.0.0.1:8000/blog/${id}`
+        let url = `https://naimur.pythonanywhere.com/blog/${id}`
+        fetch(url, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json'
@@ -35,7 +37,8 @@ const BlogBottomNavigation = ({ blog }) => {
             blog_body: blog_body,
             blog_creator: blog_creator.id
         }
-        const url = `http://127.0.0.1:8000/blog/${id}`
+        // const url = `http://127.0.0.1:8000/blog/${id}`
+        let url = `https://naimur.pythonanywhere.com/blog/${id}`
         fetch(url, {
             method: 'PATCH',
             headers: {

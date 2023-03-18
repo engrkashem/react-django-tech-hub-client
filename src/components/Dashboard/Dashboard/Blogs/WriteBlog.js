@@ -12,7 +12,8 @@ const WriteBlog = () => {
     const onSubmit = blog => {
         // console.log(blog)
         blog.topic = blog.topic.toLowerCase()
-        const blog_post_url = `http://127.0.0.1:8000/blog/`;
+        // const blog_post_url = `http://127.0.0.1:8000/blog/`;
+        const blog_post_url = `https://naimur.pythonanywhere.com/blog/`;
         fetch(blog_post_url, {
             method: 'POST',
             headers: {

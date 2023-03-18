@@ -10,7 +10,8 @@ const ApplyJob = ({ apply }) => {
 
         console.log(data, 'Data')
         // data.creator = Number(data.creator)
-        const url = `http://127.0.0.1:8000/application/`;
+        // const url = `http://127.0.0.1:8000/application/`;
+        const url = `https://naimur.pythonanywhere.com/application/`;
         const request = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

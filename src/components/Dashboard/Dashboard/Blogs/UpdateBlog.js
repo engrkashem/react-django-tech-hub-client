@@ -16,7 +16,9 @@ const UpdateBlog = () => {
             blog_body: data.blog_body,
             blog_creator: creator_id
         }
-        fetch(`http://127.0.0.1:8000/blog/${id}`, {
+        // let url = `http://127.0.0.1:8000/blog/${id}`
+        let url = `https://naimur.pythonanywhere.com/blog/${id}`
+        fetch(url, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

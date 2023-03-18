@@ -13,7 +13,9 @@ const Courses = () => {
     const { dbUser } = useContext(AuthContext)
     // console.log(dbUser)
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/enroll/${dbUser?.id}/`)
+        // let url = `http://127.0.0.1:8000/enroll/${dbUser?.id}/`
+        let url = `https://naimur.pythonanywhere.com/enroll/${dbUser?.id}/`
+        fetch(url)
             .then(res => res.json())
             .then(data => {
                 setEnrolledCourses(data?.enroll)
@@ -22,7 +24,9 @@ const Courses = () => {
 
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/course/')
+        // const url = `http://127.0.0.1:8000/course/`
+        const url = `https://naimur.pythonanywhere.com/course/`
+        fetch(url)
             .then(res => res.json())
             .then(data => {
                 // const unEnrolledCourses = data?.data?.filter(c => {

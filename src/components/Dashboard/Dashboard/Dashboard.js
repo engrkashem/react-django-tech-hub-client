@@ -17,7 +17,8 @@ const Dashboard = () => {
     // })
 
     useEffect(() => {
-        const url = `http://127.0.0.1:8000/blog/?topic=${searchText}`;
+        // let url = `http://127.0.0.1:8000/blog/?topic=${searchText}`;
+        let url = `https://naimur.pythonanywhere.com/blog/?topic=${searchText}`;
         fetch(url).then(res => res.json()).then(data => {
             if (data.length === 0) {
                 setSearchText('')

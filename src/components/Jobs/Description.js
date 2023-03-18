@@ -10,7 +10,8 @@ const Description = ({ id, update, apply }) => {
     const [isJob, setJob] = useState('');
     const { user } = useContext(AuthContext);
     useEffect(() => {
-        const url = `http://127.0.0.1:8000/job/${id}/`;
+        // let url = `http://127.0.0.1:8000/job/${id}/`;
+        let url = `https://naimur.pythonanywhere.com/job/${id}/`;
         fetch(url).then(res => res.json()).then(data => {
 
             setJob(data)
@@ -20,7 +21,8 @@ const Description = ({ id, update, apply }) => {
 
     const [isApplication, setApplication] = useState(false)
     useEffect(() => {
-        const url = `http://127.0.0.1:8000/application/${id}/`;
+        // let url = `http://127.0.0.1:8000/application/${id}/`;
+        let url = `https://naimur.pythonanywhere.com/application/${id}/`;
         fetch(url).then(res => res.json()).then(data => {
 
             setApplication(data)
@@ -31,7 +33,8 @@ const Description = ({ id, update, apply }) => {
     // console.log(isApplication);
 
     const handleDelete = (id) => {
-        const url = `http://127.0.0.1:8000/job/${id}/`;
+        // const url = `http://127.0.0.1:8000/job/${id}/`;
+        const url = `https://naimur.pythonanywhere.com/job/${id}/`;
         const request = {
             method: 'DELETE',
         }

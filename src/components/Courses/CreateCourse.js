@@ -28,7 +28,9 @@ const CreateCourse = () => {
             enroll_status: false,
             instructor: dbUser?.id,
         };
-        fetch("http://127.0.0.1:8000/course/", {
+        // const url = `http://127.0.0.1:8000/course/`
+        const url = `https://naimur.pythonanywhere.com/course/`
+        fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -50,7 +50,9 @@ const CheckoutForm = ({ course }) => {
                         student: (dbUser?.id),
                         course: id
                     }
-                    fetch('http://127.0.0.1:8000/enroll/', {
+                    // const url = `http://127.0.0.1:8000/enroll/`
+                    const url = `https://naimur.pythonanywhere.com/enroll/`
+                    fetch(url, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

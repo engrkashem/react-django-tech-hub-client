@@ -27,7 +27,9 @@ const ProfileUpdate = () => {
             userName: dbUser?.userName
         }
 
-        fetch('http://127.0.0.1:8000/user/', {
+        // const url = `http://127.0.0.1:8000/user/`
+        const url = `https://naimur.pythonanywhere.com/user/`
+        fetch(url, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

@@ -7,7 +7,8 @@ const UpdateJob = ({ data }) => {
     console.log(data)
     const putJob = (jobData) => {
         data.creator = Number(data.creator)
-        const url = `http://127.0.0.1:8000/job/${data.id}/`;
+        // const url = `http://127.0.0.1:8000/job/${data.id}/`;
+        let url = `https://naimur.pythonanywhere.com/job/${data.id}/`;
         const request = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
