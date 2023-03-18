@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider';
 import Sms from './Sms';
 
@@ -15,6 +15,11 @@ const Messaging = () => {
             .then(res => res.json())
     })
     // console.log(messages)
+    useEffect(() => {
+        setInterval(() => {
+            refetch()
+        }, 1000)
+    }, [refetch])
 
     const handleSendMessage = () => {
         const message = inputRef.current.value
