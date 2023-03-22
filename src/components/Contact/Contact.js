@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { init } from "emailjs-com";
 import emailjs from "emailjs-com";
 import { useForm } from "react-hook-form";
+import { toast } from 'react-hot-toast';
 // import mail from "../../../images/mail.svg";
 // import placeholder from "../../../images/placeholder.svg";
 init(process.env.REACT_APP_PUBLIC_KEY);
 
 console.log(process.env.REACT_APP_PUBLIC_KEY)
 const Contact = () => {
-    const [result, setResult] = useState("");
+    // const [result, setResult] = useState("");
     const {
         register,
         handleSubmit,
@@ -29,12 +30,14 @@ const Contact = () => {
                 (result) => {
                     if (result.status === 200) {
                         e.target.reset();
-                        setResult("Thank you for contacting me. You will get reply soon.");
+                        // setResult("Thank you for contacting me. You will get reply soon.");
+                        toast.success('Email is sent successfully.')
                     }
                 },
                 (error) => {
                     console.log(error.text);
-                    setResult(error.text)
+                    // setResult(error.text)
+                    toast.error('Email was not sent due to unexpected condition.')
                 }
             );
     };
